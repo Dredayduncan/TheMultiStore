@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 # browser.get(url)
 
 # Get the  url by inserting the search text into the website's url
-def get_url(searchTerm):
+def getAmazonurl(searchTerm):
     # Generate url from search term
     template = 'https://www.amazon.com/s?k={}&ref=nb_sb_noss_2'
     searchTerm = searchTerm.replace(' ', '+')
@@ -21,7 +21,7 @@ def getAmazonResults(searchTerm):
     # Define the browser we will be using
     browser = webdriver.Firefox()
 
-    url = get_url(searchTerm)
+    url = getAmazonurl(searchTerm)
 
     # Access the search url
     browser.get(url)
@@ -36,7 +36,7 @@ def getAmazonResults(searchTerm):
 
 # Get specific details from each result
 def getAmazonResultDetails(searchTerm):
-    
+
     # Get search results
     items = getAmazonResults(searchTerm)
 
