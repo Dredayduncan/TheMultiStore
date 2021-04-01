@@ -48,13 +48,13 @@ def getAmazonResultDetails(searchTerm):
 
         try:
             # Get the item name
-            name = item.find('span', 'rush-component').findNext('div').img.get('alt')
+            name = item.find('span', 'a-size-base-plus').text
         except AttributeError:
             name = ''
 
         try:
             # Get the item image
-            imageSRC = item.find('span', 'rush-component').findNext('div').img.get('src')
+            imageSRC = item.find('span', 's-image').get('src')
         except AttributeError:
             imageSRC = ''
 
