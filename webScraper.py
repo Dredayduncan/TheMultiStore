@@ -36,11 +36,14 @@ def getAmazonResults(searchTerm):
 
 # Get specific details from each result
 def getAmazonResultDetails(searchTerm):
-    # Get item
+    
+    # Get search results
     items = getAmazonResults(searchTerm)
 
+    # A list to store the results
     res = []
 
+    # Loop through the search results to get the needed data
     for item in items:
 
         try:
