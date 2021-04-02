@@ -250,6 +250,4 @@ if __name__ == '__main__':
     print(getTonatonResultDetails('led strips'))
 
 
-if __name__ == '__main__':
-    print(getJumiaResultDetails('led strips'))
 
