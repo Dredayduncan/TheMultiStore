@@ -153,7 +153,7 @@ def getJumiaResultDetails(searchTerm):
 
         try:
             # Get the item link
-            link = 'https://www.jumia.com.gh' + items[0].get('href')
+            link = 'https://www.jumia.com.gh' + item.get('href')
         except AttributeError:
             link = ''
 
@@ -185,9 +185,86 @@ def getJumiaResultDetails(searchTerm):
 '''
     Retrieve Results from Tonaton 
 '''
+# Get the  url by inserting the search text into the website's url
+def getTonatonurl(searchTerm):
+    # Generate url from search term
+    template = 'https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query={}'
+    searchTerm = searchTerm.replace(' ', '+')
+
+    return template.format(searchTerm)
+
+
+# Get the results of the search
+def getTonatonResults(searchTerm):
+
+    # Define the browser we will be using
+    browser = webdriver.Firefox()
+
+    url = getTonatonurl(searchTerm)
+
+    # Access the search url
+    browser.get(url)
+
+    # Extract the data
+    soup = BeautifulSoup(browser.page_source, 'html.parser')
+
+    # Fetch results of the search using a component of the website's html
+    results = soup.find_all('a', 'card-link--3ssYv gtm-ad-item')
+
+    return results
+
+# Get specific details from each result
+def getTonatonResultDetails(searchTerm):
+
+    # Get search results
+    items = getTonatonResults(searchTerm)
+
+    # A list to store the results
+    res = []
+
+    # Loop through the search results to get the needed data
+    for item in items:
+
+        try:
+            # Get the item name
+            name = item.find('h2', 'heading--2eONR heading-2--1OnX8 title--3yncE block--3v-Ow').text
+        except AttributeError:
+            name = ''
+
+        try:
+            # Get the item image
+            imageSRC = item.find('img', 'normal-ad--1TyjD').get('src')
+        except AttributeError:
+            imageSRC = ''
+
+        try:
+            # Get the item link
+            link = 'https://tonaton.com' + item.get('href')
+        except AttributeError:
+            link = ''
+
+        try:
+            # Get item price using the html element containing the price
+            price = item.find('span').text
+        except AttributeError:
+            price = ''
+
+        try:
+            # Get the reviews
+            rating = ''
+        except AttributeError:
+            rating = ''
+
+        # Append each result to the list
+        res.append([name, imageSRC, link,  price])
+
+    return res
 
 
 if __name__ == '__main__':
-    res = getJumiaResultDetails(sys.argv[1])[0]['name']
-    print(res)
+    print(getAmazonResultDetails('led strips'))
+    print(getJumiaResultDetails('led strips'))
+    print(getTonatonResultDetails('led strips'))
+
+
 
