@@ -25,10 +25,8 @@ create table SearchHistory(
 create table History(
 	username varchar(50),
     foreign key(username) references Users(username),
-    HistoryName varchar(50) NOT NULL,
-    ImageSrc varchar(255),
-    HistoryLink varchar(255) NOT NULL,
+    `name` varchar(50) NOT NULL,
+    img varchar(255),
+    link varchar(255) NOT NULL,
     price float,
-    rating float,
-    CHECK(rating <= 10.0)
 );
