@@ -2,6 +2,7 @@
 from selenium import webdriver
 import csv
 from bs4 import BeautifulSoup
+import sys
 
 # Access the url
 # browser.get(url)
@@ -13,7 +14,7 @@ from bs4 import BeautifulSoup
 def getAmazonurl(searchTerm):
     # Generate url from search term
     template = 'https://www.amazon.com/s?k={}&ref=nb_sb_noss_2'
-    searchTerm = searchTerm.replace(' ', '+')
+    # searchTerm = searchTerm.replace(' ', '+')
 
     return template.format(searchTerm)
 
@@ -44,7 +45,7 @@ def getAmazonResultDetails(searchTerm):
     items = getAmazonResults(searchTerm)
 
     # A list to store the results
-    res = []
+    results = []
 
     # Loop through the search results to get the needed data
     for item in items:
@@ -82,9 +83,17 @@ def getAmazonResultDetails(searchTerm):
             rating = ''
 
         # Append each result to the list
-        res.append([name, imageSRC, link, price, rating])
+        product = {
+            'name': name,
+            'image': imageSRC,
+            'link': link,
+            'price': price,
+            'rating': rating
+        }
 
-    return res
+        results.append(product)
+
+    return results
 
 
 '''
@@ -94,7 +103,7 @@ def getAmazonResultDetails(searchTerm):
 def getJumiaurl(searchTerm):
     # Generate url from search term
     template = 'https://www.jumia.com.gh/catalog/?q={}'
-    searchTerm = searchTerm.replace(' ', '+')
+    # searchTerm = searchTerm.replace(' ', '+')
 
     return template.format(searchTerm)
 
@@ -125,7 +134,7 @@ def getJumiaResultDetails(searchTerm):
     items = getJumiaResults(searchTerm)
 
     # A list to store the results
-    res = []
+    results = []
 
     # Loop through the search results to get the needed data
     for item in items:
@@ -149,7 +158,7 @@ def getJumiaResultDetails(searchTerm):
             link = ''
 
         try:
-            # Get item price using the html element containing the pric
+            # Get item price using the html element containing the price
             price = item.find('div', 'prc').text
         except AttributeError:
             price = ''
@@ -161,9 +170,17 @@ def getJumiaResultDetails(searchTerm):
             rating = ''
 
         # Append each result to the list
-        res.append([name, imageSRC, link, price, rating])
+        product = {
+            'name': name,
+            'image': imageSRC,
+            'link': link,
+            'price': price,
+            'rating': rating
+        }
 
-    return res
+        results.append(product)
+
+    return results
 
 '''
     Retrieve Results from Tonaton 
@@ -171,5 +188,6 @@ def getJumiaResultDetails(searchTerm):
 
 
 if __name__ == '__main__':
-    print(getJumiaResultDetails('led strips'))
+    res = getJumiaResultDetails(sys.argv[1])[0]['name']
+    print(res)
 

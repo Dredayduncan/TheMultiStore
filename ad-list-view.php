@@ -9,22 +9,22 @@
   <title>Classimax</title>
   
   <!-- FAVICON -->
-  <link href="img/favicon.png" rel="shortcut icon">
+  <link href="assets/images/MultistoreIcon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
   <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap-slider.css">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap-slider.css">
   <!-- Font Awesome -->
-  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="assets/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="assets/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="assets/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="assets/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -43,7 +43,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="index.php">
 						<img src="images/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -53,7 +53,7 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item active">
-								<a class="nav-link" href="index.html">Home</a>
+								<a class="nav-link" href="index.php">Home</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
@@ -92,7 +92,7 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="category.html">Ad-Gird View</a>
+									<a class="dropdown-item" href="category.php">Ad-Gird View</a>
 									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
 								</div>
 							</li>
@@ -117,23 +117,28 @@
 			<div class="col-md-12">
 				<!-- Advance Search -->
 				<div class="advance-search">
-					<form>
-						<div class="form-row">
-							<div class="form-group col-md-4">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
+        <form action='ad-list-view.php' method='post'>
+							<div class="form-row">
+								<div class="form-group col-md-10">
+									<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" name='item' placeholder="What are you looking for">
+								</div>
+								<!-- <div class="form-group col-md-3">
+									<select class="w-100 form-control mt-lg-1 mt-md-2">
+										<option>Category</option>
+										<option value="1">Top rated</option>
+										<option value="2">Lowest Price</option>
+										<option value="4">Highest Price</option>
+									</select>
+								</div>
+								<div class="form-group col-md-3">
+									<input type="text" class="form-control my-2 my-lg-1" id="inputLocation4" placeholder="Location">
+								</div> -->
+								<div class="form-group col-md-2 align-self-center">
+									<!-- <a id='homeSearch' class="nav-link login-button border border-primary bg-primary text-white" href="category.php">Search</a> -->
+									<button type="submit" class="btn btn-primary">Search</button>
+								</div>
 							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
-							</div>
-							<div class="form-group col-md-3">
-								<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
-							</div>
-							<div class="form-group col-md-2">
-
-								<button type="submit" class="btn btn-primary">Search Now</button>
-							</div>
-						</div>
-					</form>
+						</form>
 				</div>
 			</div>
 		</div>
@@ -144,7 +149,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="search-result bg-gray">
-					<h2>Results For "Electronics"</h2>
+        <?php
+						$item = str_replace(' ', '+', $_POST['item']);
+						echo "<h2>Results For ".$_POST['item']."</h2>";
+					?>
 					<p>123 Results on 12 December, 2017</p>
 				</div>
 			</div>
@@ -153,78 +161,37 @@
 			<div class="col-lg-3 col-md-4">
 				<div class="category-sidebar">
 					<div class="widget category-list">
-	<h4 class="widget-header">All Category</h4>
-	<ul class="category-list">
-		<li><a href="category.html">Laptops <span>93</span></a></li>
-		<li><a href="category.html">Iphone <span>233</span></a></li>
-		<li><a href="category.html">Microsoft  <span>183</span></a></li>
-		<li><a href="category.html">Monitors <span>343</span></a></li>
-	</ul>
-</div>
+            <h4 class="widget-header">All Category</h4>
+            <ul class="category-list">
+              <li><a href="category.php">Amazon <span>93</span></a></li>
+              <li><a href="category.php">Jumia <span>233</span></a></li>
+              <li><a href="category.php">Tonaton  <span>183</span></a></li>
+	          </ul>
+          </div>
 
-<div class="widget category-list">
-	<h4 class="widget-header">Nearby</h4>
-	<ul class="category-list">
-		<li><a href="category.html">New York <span>93</span></a></li>
-		<li><a href="category.html">New Jersy <span>233</span></a></li>
-		<li><a href="category.html">Florida  <span>183</span></a></li>
-		<li><a href="category.html">California <span>120</span></a></li>
-		<li><a href="category.html">Texas <span>40</span></a></li>
-		<li><a href="category.html">Alaska <span>81</span></a></li>
-	</ul>
-</div>
 
-<div class="widget filter">
-	<h4 class="widget-header">Show Produts</h4>
-	<select>
-		<option>Popularity</option>
-		<option value="1">Top rated</option>
-		<option value="2">Lowest Price</option>
-		<option value="4">Highest Price</option>
-	</select>
-</div>
+          <div class="widget filter">
+            <h4 class="widget-header">Show Produts</h4>
+            <select>
+              <option>Popularity</option>
+              <option value="1">Top rated</option>
+              <option value="2">Lowest Price</option>
+              <option value="4">Highest Price</option>
+            </select>
+          </div>
 
-<div class="widget price-range w-100">
-	<h4 class="widget-header">Price Range</h4>
-	<div class="block">
-						<input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5"
-						data-slider-value="[0,5000]">
-				<div class="d-flex justify-content-between mt-2">
-						<span class="value">$10 - $5000</span>
-				</div>
-	</div>
-</div>
-
-<div class="widget product-shorting">
-	<h4 class="widget-header">By Condition</h4>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Brand New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Almost New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Gently New
-	  </label>
-	</div>
-	<div class="form-check">
-	  <label class="form-check-label">
-	    <input class="form-check-input" type="checkbox" value="">
-	    Havely New
-	  </label>
-	</div>
-</div>
-
+          <div class="widget price-range w-100">
+            <h4 class="widget-header">Price Range</h4>
+            <div class="block">
+              <input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5" data-slider-value="[0,5000]">
+                <div class="d-flex justify-content-between mt-2">
+                    <span class="value">$10 - $5000</span>
+                </div>
+            </div>
+          </div>
 				</div>
 			</div>
+
 			<div class="col-lg-9 col-md-8">
 				<div class="category-search-filter">
 					<div class="row">
@@ -242,10 +209,10 @@
 								<strong>Views</strong>
 								<ul class="list-inline view-switcher">
 									<li class="list-inline-item">
-										<a href="category.html"><i class="fa fa-th-large"></i></a>
+										<a href="category.php"><i class="fa fa-th-large"></i></a>
 									</li>
 									<li class="list-inline-item">
-										<a href="category.html" class="text-info"><i class="fa fa-reorder"></i></a>
+										<a href="#" class="text-info"><i class="fa fa-reorder"></i></a>
 									</li>
 								</ul>
 							</div>
@@ -269,7 +236,7 @@
                             <a href="single.html" class="font-weight-bold">11inch Macbook Air</a>
                         </div>
                         <ul class="list-inline mt-2 mb-3">
-                            <li class="list-inline-item"><a href="category.html"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
+                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
                             <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
                         </ul>
                         <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
@@ -305,7 +272,7 @@
                             <a href="single.html" class="font-weight-bold">Study Table Combo</a>
                         </div>
                         <ul class="list-inline mt-2 mb-3">
-                            <li class="list-inline-item"><a href="category.html"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
+                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
                             <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
                         </ul>
                         <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
@@ -341,7 +308,7 @@
                             <a href="single.html" class="font-weight-bold">11inch Macbook Air</a>
                         </div>
                         <ul class="list-inline mt-2 mb-3">
-                            <li class="list-inline-item"><a href="category.html"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
+                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
                             <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
                         </ul>
                         <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
@@ -377,7 +344,7 @@
                             <a href="single.html" class="font-weight-bold">Study Table Combo</a>
                         </div>
                         <ul class="list-inline mt-2 mb-3">
-                            <li class="list-inline-item"><a href="category.html"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
+                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
                             <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
                         </ul>
                         <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
@@ -413,7 +380,7 @@
                             <a href="single.html" class="font-weight-bold">11inch Macbook Air</a>
                         </div>
                         <ul class="list-inline mt-2 mb-3">
-                            <li class="list-inline-item"><a href="category.html"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
+                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
                             <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
                         </ul>
                         <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
@@ -501,7 +468,7 @@
         <div class="block">
           <h4>Admin Pages</h4>
           <ul>
-            <li><a href="category.html">Category</a></li>
+            <li><a href="category.php">Category</a></li>
             <li><a href="single.html">Single Page</a></li>
             <li><a href="store.html">Store Single</a></li>
             <li><a href="single-blog.html">Single Post</a>
@@ -567,21 +534,21 @@
 </footer>
 
 <!-- JAVASCRIPTS -->
-<script src="plugins/jQuery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/popper.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap-slider.js"></script>
+<script src="assets/plugins/jQuery/jquery.min.js"></script>
+<script src="assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap-slider.js"></script>
   <!-- tether js -->
-<script src="plugins/tether/js/tether.min.js"></script>
-<script src="plugins/raty/jquery.raty-fa.js"></script>
-<script src="plugins/slick-carousel/slick/slick.min.js"></script>
-<script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
-<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="assets/plugins/tether/js/tether.min.js"></script>
+<script src="assets/plugins/raty/jquery.raty-fa.js"></script>
+<script src="assets/plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
 <!-- google map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
 <script src="plugins/google-map/gmap.js"></script>
-<script src="js/script.js"></script>
+<script src="assets/js/script.js"></script>
 
 </body>
 

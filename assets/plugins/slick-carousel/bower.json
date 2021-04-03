@@ -24,7 +24,7 @@
         "test",
         "tests",
         "package.json",
-        "index.html"
+        "index.php"
     ],
     "dependencies": {
         "jquery": ">=1.7"

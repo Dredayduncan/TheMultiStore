@@ -49,7 +49,7 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto main-nav ">
 								<li class="nav-item active">
-									<a class="nav-link" href="index.html">Home</a>
+									<a class="nav-link" href="index.php">Home</a>
 								</li>
 								<li class="nav-item dropdown dropdown-slide">
 									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Favourites<span><i class=""></i></span>
@@ -102,13 +102,13 @@
 					<div class="advance-search">
 						<div class="container">
 							<div class="row justify-content-center">
-								<div class="col-lg-12 col-md-12 align-content-center">
-									<form>
+								<div class="col-lg-6 col-md-12 align-content-center">
+									<form action='category.php' method='post'>
 										<div class="form-row">
-											<div class="form-group col-md-4">
-												<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
+											<div class="form-group col-md-10">
+												<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" name='item' placeholder="What are you looking for">
 											</div>
-											<div class="form-group col-md-3">
+											<!-- <div class="form-group col-md-3">
 												<select class="w-100 form-control mt-lg-1 mt-md-2">
 													<option>Category</option>
 													<option value="1">Top rated</option>
@@ -118,10 +118,10 @@
 											</div>
 											<div class="form-group col-md-3">
 												<input type="text" class="form-control my-2 my-lg-1" id="inputLocation4" placeholder="Location">
-											</div>
+											</div> -->
 											<div class="form-group col-md-2 align-self-center">
-												<a class="nav-link login-button border border-primary bg-primary text-white" href="category.html">Search</a>
-												<!-- <button type="submit" class="btn btn-primary" href="category.html">Search Now</button> -->
+												<!-- <a id='homeSearch' class="nav-link login-button border border-primary bg-primary text-white" href="category.php">Search</a> -->
+												<button type="submit" class="btn btn-primary">Search</button>
 											</div>
 										</div>
 									</form>
@@ -147,7 +147,7 @@
 				<div class="col-md-12">
 					<div class="section-title">
 						<h2>Trending Searches</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, magnam.</p>
+						<p>Have a look at what others have been searching</p>
 					</div>
 				</div>
 			</div>
@@ -378,6 +378,10 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
 	<script src="plugins/google-map/gmap.js"></script>
 	<script src="assets/js/script.js"></script>
+
+	<script>
+
+	</script>
 
 </body>
 

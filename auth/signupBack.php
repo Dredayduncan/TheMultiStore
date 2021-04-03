@@ -7,10 +7,8 @@
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $user = $_POST['uname'];
-    $phone = $_POST['number'];
     $email = $_POST['email'];
     $password = $_POST['pword'];
-    $limit = $_POST['limit'];
     $pass = password_hash($password, PASSWORD_DEFAULT);
 
 
@@ -25,10 +23,12 @@
         header("Location: ../index.php?notice=Email already exists!");
         die;
     }
+
+    // Grant user access if he or she is new
     else{
         //Insert records to database
-        $query = "INSERT into user (firstname, lastname, username, phonenumber, email, password, dailylimit)
-                  VALUES ('$fname', '$lname', '$user', '$phone', '$email', '$pass', '$limit')";
+        $query = "INSERT into user (firstname, lastname, username, email, password)
+                  VALUES ('$fname', '$lname', '$user', '$email', '$pass')";
 
         // execute query
         $result = mysqli_query($conn, $query);
@@ -37,9 +37,7 @@
             session_start();
             $_SESSION['username'] = $user;
             $_SESSION['email'] = $email;
-            $_SESSION['pass'] = $password;
-
-            header("Location: login.php?notice=Account has been successfully created!");
+            header("Location: login.html?notice=Account has been successfully created!");
         }
 
         die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
