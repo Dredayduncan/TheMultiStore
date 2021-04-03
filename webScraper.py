@@ -145,11 +145,15 @@ def getJumiaResultDetails(searchTerm):
         try:
             # Get the item link
             link = 'https://www.jumia.com.gh' + items.get('href')
+
         except AttributeError:
             link = ''
 
         try:
+
             # Get item price using the html element containing the price
+
+
             price = item.find('div', 'prc').text
         except AttributeError:
             price = ''
