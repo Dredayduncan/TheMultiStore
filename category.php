@@ -73,7 +73,7 @@
 							</ul>
 							<ul class="navbar-nav ml-auto mt-10">
 								<li class="nav-item ">
-									<a class="nav-link login-button border border-success bg-success text-white" href="login.html">Login</a>
+									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.html">Login</a>
 								</li>
 							</ul>
 						</div>
@@ -206,44 +206,56 @@
 				<!-- Products -->
 
 				<?php
-					$results = shell_exec('python3 webScraper.py '. $item. '2>&1');
+					require 'simple_html_dom.php';
 
-					echo '<div class="product-grid-list">
-					<div class="row mt-30">
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">Beans:'.$results.'</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-tag"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>';
+					function JumiaResults($searchTerm){
+						$context = stream_context_create(array(
+							'http' => array(
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+							),
+						));
+
+						$html = file_get_html('https://www.jumia.com.gh/catalog/?q='.$searchTerm, false, $context);
+						$results = '';
+
+						for ($i = 0; $i < 15; $i++){
+							$name = $html->find(".info", $i)->find('h3', 0);
+							$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
+							$price = $html->find('.core', $i)->find('.prc', 0);
+							$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
+
+							$results.='<div class="product-grid-list">
+										<div class="row mt-30">
+											<div class="col-sm-12 col-lg-4 col-md-6">
+												<!-- product card -->
+												<div class="product-item bg-light">
+													<div class="card">
+														<div class="thumb-content">
+															<div class="price">'.$price.'</div>
+															<a href="'.$link.'">
+																<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+															</a>
+														</div>
+														<div class="card-body">
+															<h4 class="card-title"><a href="'.$link.'">'.$name.'</a></h4>
+															<ul class="list-inline product-meta">
+																<li class="list-inline-item">
+																	<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>';
+						}
+						
+						return $results;
+
+						
+					}
+
+					echo JumiaResults($item);
+					
 					die;
 				?>
 				<div class="product-grid-list">

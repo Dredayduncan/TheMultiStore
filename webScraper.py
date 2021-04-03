@@ -110,29 +110,29 @@ def getJumiaurl(searchTerm):
 
 # Get the results of the search
 def getJumiaResults(searchTerm):
-
     # Define the browser we will be using
     browser = webdriver.Firefox()
-
+    print('line 1')
     url = getJumiaurl(searchTerm)
-
+    print("Line 2")
     # Access the search url
     browser.get(url)
+    print("Line 3")
 
     # Extract the data
     soup = BeautifulSoup(browser.page_source, 'html.parser')
-
+    print("Line 4")
     # Fetch results of the search using a component of the website's html
     results = soup.find_all('a', 'core')
+    print("Line 5")
 
     return results
 
 # Get specific details from each result
 def getJumiaResultDetails(searchTerm):
-
     # Get search results
     items = getJumiaResults(searchTerm)
-
+    print("Line 6")
     # A list to store the results
     results = []
 
@@ -262,9 +262,12 @@ def getTonatonResultDetails(searchTerm):
 
 
 if __name__ == '__main__':
-    print(getAmazonResultDetails('led strips'))
+    # print(getAmazonResultDetails('led strips'))
+    print("Line 0")
     print(getJumiaResultDetails('led strips'))
-    print(getTonatonResultDetails('led strips'))
+    # print(getTonatonResultDetails('led strips'))
+
+    print('caleb')
 
 
 
