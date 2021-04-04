@@ -219,8 +219,7 @@
 					function JumiaResults($searchTerm){
 						$context = stream_context_create(array(
 							'http' => array(
-								'header' => array('User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0
-								'),
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
 							),
 						));
 
