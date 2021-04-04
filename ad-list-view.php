@@ -149,9 +149,16 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="search-result bg-gray">
-        <?php
-						$item = str_replace(' ', '+', $_POST['item']);
-						echo "<h2>Results For ".$_POST['item']."</h2>";
+                 <?php
+						if ($_GET['search']){
+                            $product = $_GET['search'];
+                            echo "<h2>Results For ".$product."</h2>";
+                        }
+                        else{
+                            $item = str_replace(' ', '+', $_POST['item']);
+                            echo "<h2>Results For ".$_POST['item']."</h2>";
+                        
+                        }
 					?>
 					<p>123 Results on 12 December, 2017</p>
 				</div>
@@ -196,7 +203,7 @@
 				<div class="category-search-filter">
 					<div class="row">
 						<div class="col-md-6">
-							<strong>Short</strong>
+							<strong>Sort</strong>
 							<select>
 								<option>Most Recent</option>
 								<option value="1">Most Popular</option>
@@ -209,7 +216,7 @@
 								<strong>Views</strong>
 								<ul class="list-inline view-switcher">
 									<li class="list-inline-item">
-										<a href="category.php"><i class="fa fa-th-large"></i></a>
+										<a href="category.php?search=<?php echo $product; ?>"><i class="fa fa-th-large"></i></a>
 									</li>
 									<li class="list-inline-item">
 										<a href="#" class="text-info"><i class="fa fa-reorder"></i></a>
@@ -221,42 +228,197 @@
 				</div>
 
 				<!-- ad listing list  -->
+                <?php
+					require 'simple_html_dom.php';
+
+					// Get the seacrh results from Jumia
+					function JumiaResults($searchTerm){
+						$context = stream_context_create(array(
+							'http' => array(
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+							),
+						));
+                    
+						$html = file_get_html('https://www.jumia.com.gh/catalog/?q='.$searchTerm, false, $context);
+						$results = '';
+
+						for ($i = 0; $i < 15; $i++){
+							$name = $html->find(".info", $i)->find('h3', 0);
+							$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
+							$price = $html->find('.core', $i)->find('.prc', 0);
+							$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
+
+							$results.='<div class="ad-listing-list mt-20">
+                                        <div class="row p-lg-3 p-sm-5 p-4">
+                                            <div class="col-lg-4 align-self-center">
+                                                <div class="price">'.$price.'</div>
+                                                <a href="'.$link.'">
+                                                    <img src="'.$img.'" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-10">
+                                                        <div class="ad-listing-content">
+                                                            <div>
+                                                                <a href="'.$link.'" class="font-weight-bold">'.$name.'</a>
+                                                            </div>
+                                                            <ul class="list-inline mt-2 mb-3">
+                                                                <li class="list-inline-item"><a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+						}
+						return $results;
+					}
+
+					// Get search results from Amazon
+					function AmazonResults($searchTerm){
+						$context = stream_context_create(array(
+							'http' => array(
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+							),
+						));
+
+						$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss_2', false, $context);
+						$results = '';
+
+						for ($i = 0; $i < 15; $i++){
+							$name = $html->find(".a-size-base-plus", $i);
+							$img = $html->find(".s-image", $i)->getAttribute('src');
+							$price = $html->find('.a-price .a-offscreen', $i);
+							$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
+
+							$results.='<div class="ad-listing-list mt-20">
+                                        <div class="row p-lg-3 p-sm-5 p-4">
+                                            <div class="col-lg-4 align-self-center">
+                                                <div class="price">'.$price.'</div>
+                                                <a href="'.$link.'">
+                                                    <img src="'.$img.'" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-10">
+                                                        <div class="ad-listing-content">
+                                                            <div>
+                                                                <a href="'.$link.'" class="font-weight-bold">'.$name.'</a>
+                                                            </div>
+                                                            <ul class="list-inline mt-2 mb-3">
+                                                                <li class="list-inline-item"><a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+						}
+						return $results;
+					}
+
+					// Get search results from Amazon
+					function tonatonResults($searchTerm){
+						$context = stream_context_create(array(
+							'http' => array(
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+							),
+						));
+
+						$html = file_get_html('https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query='.$searchTerm, false, $context);
+						$results = '';
+
+						for ($i = 0; $i < 15; $i++){
+							$card = $html->find('.normal--2QYVk', $i);
+							$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
+							$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
+							$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
+	
+							$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
+                            
+							$results.='<div class="ad-listing-list mt-20">
+                                        <div class="row p-lg-3 p-sm-5 p-4">
+                                            <div class="col-lg-4 align-self-center">
+                                                <div class="price">'.$price.'</div>
+                                                <a href="'.$link.'">
+                                                    <img src="'.$img.'" class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-10">
+                                                        <div class="ad-listing-content">
+                                                            <div>
+                                                                <a href="'.$link.'" class="font-weight-bold">'.$name.'</a>
+                                                            </div>
+                                                            <ul class="list-inline mt-2 mb-3">
+                                                                <li class="list-inline-item"><a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>';
+						}
+						return $results;
+					}
+
+                    if ($_GET['search']){
+						$item = str_replace(' ', '+', $_GET['search']);
+						echo JumiaResults($item);
+						echo AmazonResults($item);
+						echo tonatonResults($item);
+					}
+					else{
+						echo JumiaResults($item);
+						echo AmazonResults($item);
+						echo tonatonResults($item);
+					
+					}
+					
+					die;
+                ?>
 				<div class="ad-listing-list mt-20">
-    <div class="row p-lg-3 p-sm-5 p-4">
-        <div class="col-lg-4 align-self-center">
-            <a href="single.html">
-                <img src="images/products/products-1.jpg" class="img-fluid" alt="">
-            </a>
-        </div>
-        <div class="col-lg-8">
-            <div class="row">
-                <div class="col-lg-6 col-md-10">
-                    <div class="ad-listing-content">
-                        <div>
-                            <a href="single.html" class="font-weight-bold">11inch Macbook Air</a>
+                    <div class="row p-lg-3 p-sm-5 p-4">
+                        <div class="col-lg-4 align-self-center">
+                            <a href="single.html">
+                                <img src="images/products/products-1.jpg" class="img-fluid" alt="">
+                            </a>
                         </div>
-                        <ul class="list-inline mt-2 mb-3">
-                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
-                            <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
-                        </ul>
-                        <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-10">
+                                    <div class="ad-listing-content">
+                                        <div>
+                                            <a href="single.html" class="font-weight-bold">11inch Macbook Air</a>
+                                        </div>
+                                        <ul class="list-inline mt-2 mb-3">
+                                            <li class="list-inline-item"><a href="category.php"> <i class="fa fa-folder-open-o"></i> Electronics</a></li>
+                                            <li class="list-inline-item"><a href=""><i class="fa fa-calendar"></i>26th December</a></li>
+                                        </ul>
+                                        <p class="pr-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 align-self-center">
+                                    <div class="product-ratings float-lg-right pb-3">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
+                                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="product-ratings float-lg-right pb-3">
-                        <ul class="list-inline">
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-                            <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 				<div class="ad-listing-list mt-20">
     <div class="row p-lg-3 p-sm-5 p-4">
         <div class="col-lg-4 align-self-center">
