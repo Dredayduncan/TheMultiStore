@@ -122,9 +122,16 @@
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
 						<?php
-						$item = str_replace(' ', '+', $_POST['item']);
-						echo "<h2>Results For ".$_POST['item']."</h2>";
+							if ($_POST['item']){
+								$item = str_replace(' ', '+', $_POST['item']);
+								echo "<h2>Results For ".$_POST['item']."</h2>";
+							}
+							else{
+								$product = $_GET['search'];
+								echo "<h2>Results For ".$product."</h2>";
+							}
 						?>
+						
 						<p>123 Results on 12 December, 2017</p>
 					</div>
 				</div>
@@ -195,7 +202,7 @@
 										<a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
 									</li>
 									<li class="list-inline-item">
-										<a href="ad-list-view.php"><i class="fa fa-reorder"></i></a>
+										<a href="ad-list-view.php?search=<? echo $item; ?>"><i class="fa fa-reorder"></i></a>
 									</li>
 								</ul>
 							</div>
@@ -208,6 +215,7 @@
 				<?php
 					require 'simple_html_dom.php';
 
+					// Get the seacrh results from Jumia
 					function JumiaResults($searchTerm){
 						$context = stream_context_create(array(
 							'http' => array(
@@ -225,37 +233,129 @@
 							$price = $html->find('.core', $i)->find('.prc', 0);
 							$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
 
-							$results.='<div class="product-grid-list">
-										<div class="row mt-30">
-											<div class="col-sm-12 col-lg-4 col-md-6">
-												<!-- product card -->
-												<div class="product-item bg-light">
-													<div class="card">
-														<div class="thumb-content">
-															<div class="price">'.$price.'</div>
-															<a href="'.$link.'">
-																<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-															</a>
-														</div>
-														<div class="card-body">
-															<h4 class="card-title"><a href="'.$link.'">'.$name.'</a></h4>
-															<ul class="list-inline product-meta">
-																<li class="list-inline-item">
-																	<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
-																</li>
-															</ul>
-														</div>
+							$results.='<div class="col-sm-12 col-lg-4 col-md-6">
+											<!-- product card -->
+											<div class="product-item bg-light">
+												<div class="card">
+													<div class="thumb-content">
+														<div class="price">'.$price.'</div>
+														<a href="'.$link.'" target="_blank">
+															<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+														</a>
+													</div>
+													<div class="card-body">
+														<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
+														<ul class="list-inline product-meta">
+															<li class="list-inline-item">
+																<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
+															</li>
+														</ul>
 													</div>
 												</div>
-											</div>';
+											</div>
+										</div>';
 						}
-						
 						return $results;
-
-						
 					}
 
-					echo JumiaResults($item);
+					// Get search results from Amazon
+					function AmazonResults($searchTerm){
+						$context = stream_context_create(array(
+							'http' => array(
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+							),
+						));
+
+						$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss_2', false, $context);
+						$results = '';
+
+						for ($i = 0; $i < 15; $i++){
+							$name = $html->find(".a-size-base-plus", $i);
+							$img = $html->find(".s-image", $i)->getAttribute('src');
+							$price = $html->find('.a-price .a-offscreen', $i);
+							$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
+
+							$results.='<div class="col-sm-12 col-lg-4 col-md-6">
+											<!-- product card -->
+											<div class="product-item bg-light">
+												<div class="card">
+													<div class="thumb-content">
+														<div class="price">'.$price.'</div>
+														<a href="'.$link.'" target="_blank">
+															<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+														</a>
+													</div>
+													<div class="card-body">
+														<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
+														<ul class="list-inline product-meta">
+															<li class="list-inline-item">
+																<a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>';
+						}
+						return $results;
+					}
+
+					// Get search results from Amazon
+					function tonatonResults($searchTerm){
+						$context = stream_context_create(array(
+							'http' => array(
+								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+							),
+						));
+
+						$html = file_get_html('https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query='.$searchTerm, false, $context);
+						$results = '';
+
+						for ($i = 0; $i < 15; $i++){
+							$card = $html->find('.normal--2QYVk', $i);
+							$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
+							$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
+							$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
+	
+							$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
+							$results.='<div class="col-sm-12 col-lg-4 col-md-6">
+											<!-- product card -->
+											<div class="product-item bg-light">
+												<div class="card">
+													<div class="thumb-content">
+														<div class="price">'.$price.'</div>
+														<a href="'.$link.'" target="_blank">
+															<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+														</a>
+													</div>
+													<div class="card-body">
+														<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
+														<ul class="list-inline product-meta">
+															<li class="list-inline-item">
+																<a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>';
+						}
+						return $results;
+					}
+
+					if ($_POST['item']){
+						echo JumiaResults($item);
+						echo AmazonResults($item);
+						echo tonatonResults($item);
+					}
+					else{
+						$item = str_replace(' ', '+', $_GET['search']);
+						echo JumiaResults($item);
+						echo AmazonResults($item);
+						echo tonatonResults($item);
+					}
+					
+					
 					
 					die;
 				?>
