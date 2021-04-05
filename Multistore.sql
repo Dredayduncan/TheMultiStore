@@ -28,5 +28,5 @@ create table History(
     `name` varchar(50) NOT NULL,
     img varchar(255),
     link varchar(255) NOT NULL,
-    price float,
+    price float
 );
