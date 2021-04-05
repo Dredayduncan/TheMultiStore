@@ -15,7 +15,7 @@ Let's make it easy! Just download this template, use it on your project.
 
 # Demo
 - [Login](https://nauvalazhar.github.io/bootstrap-4-login-page/index.php)
-- [Register](https://nauvalazhar.github.io/bootstrap-4-login-page/register.html)
+- [Register](https://nauvalazhar.github.io/bootstrap-4-login-page/register.php)
 - [Forgot Password](https://nauvalazhar.github.io/bootstrap-4-login-page/forgot.html)
 - [Reset Password](https://nauvalazhar.github.io/bootstrap-4-login-page/reset.html)
 

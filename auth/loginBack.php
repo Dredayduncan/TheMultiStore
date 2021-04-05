@@ -4,10 +4,10 @@
 
     //Get Login Data
     $email = $_POST['email'];
-    $pass = $_POST['pword'];
+    $pass = $_POST['password'];
 
     // write query
-    $sql = "SELECT * FROM user WHERE email='".$email."'";
+    $sql = "SELECT * FROM Users WHERE email='".$email."'";
 
     // execute query
     $result = mysqli_query($conn, $sql);
@@ -28,11 +28,8 @@
     if (password_verify($pass, $user['password'])) {
         //Make necessary info globally accessible
         session_start();
-        $_SESSION['logEmail'] = $email;
-        $_SESSION['logUname'] = $user['username'];
-        $_SESSION['id'] = $user['userID'];
+        $_SESSION['username'] = $user['username'];
         
-
         //Reroute to email page
         header("Location: ../index.php");
         die;

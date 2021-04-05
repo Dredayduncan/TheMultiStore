@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+	<title>Sign Up</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../assets/css/my-login.css">
 </head>
@@ -23,21 +23,21 @@
 							<form action='signupBack.php' method="POST" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="name"> First name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input id="name" type="text" class="form-control" name="fname" required autofocus>
 									<div class="invalid-feedback">
 										What's your First name?
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="name">Last Name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input id="name" type="text" class="form-control" name="lname" required autofocus>
 									<div class="invalid-feedback">
 										What's your Last name?
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="name">Username</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input id="name" type="text" class="form-control" name="uname" required autofocus>
 									<div class="invalid-feedback">
 										What's your username?
 									</div>
@@ -60,7 +60,7 @@
 								</div>
 								<div class="form-group">
 									<label for="name">Date of birth</label>
-									<input id="name" type="date" class="form-control" name="name" required autofocus>
+									<input id="name" type="date" class="form-control" name="dob" required autofocus>
 									<div class="invalid-feedback">
 										What's your date of birth?
 									</div>
@@ -82,7 +82,7 @@
 									</button>
 								</div>
 								<div class="mt-4 text-center">
-									Already have an account? <a href="login.html">Login</a>
+									Already have an account? <a href="login.php">Login</a>
 								</div>
 							</form>
 						</div>

@@ -72,7 +72,7 @@
 							</ul>
 							<ul class="navbar-nav ml-auto mt-10">
 								<li class="nav-item ">
-									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.html">Login</a>
+									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
 								</li>
 							</ul>
 						</div>

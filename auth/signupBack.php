@@ -8,27 +8,28 @@
     $lname = $_POST['lname'];
     $user = $_POST['uname'];
     $email = $_POST['email'];
-    $password = $_POST['pword'];
+    $password = $_POST['password'];
+    $dob = $_POST['dob'];
     $pass = password_hash($password, PASSWORD_DEFAULT);
 
 
     //Check if email exists
-    $query = "SELECT * FROM user where email='".$email."'";
+    $query = "SELECT * FROM Users where email='".$email."'";
 
     // execute query
     $result = mysqli_query($conn, $query);
 
     //Check if email is present
     if (mysqli_num_rows($result) != 0) {
-        header("Location: ../index.php?notice=Email already exists!");
+        header("Location: register.php?notice=Email already exists!");
         die;
     }
 
     // Grant user access if he or she is new
     else{
         //Insert records to database
-        $query = "INSERT into user (firstname, lastname, username, email, password)
-                  VALUES ('$fname', '$lname', '$user', '$email', '$pass')";
+        $query = "INSERT into Users (firstname, lastname, username, password, email, DOB)
+                  VALUES ('$fname', '$lname', '$user', '$pass', '$email', '$dob')";
 
         // execute query
         $result = mysqli_query($conn, $query);
@@ -36,11 +37,10 @@
         if ($result){
             session_start();
             $_SESSION['username'] = $user;
-            $_SESSION['email'] = $email;
-            header("Location: login.html?notice=Account has been successfully created!");
+            header("Location: login.php?notice=Account has been successfully created!");
         }
 
-        die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+        die("ERROR: Could not able to execute $query. " . mysqli_error($conn));
     }
 
 ?>
