@@ -13,15 +13,19 @@
 
 <body class="my-login-page">
 	
+	
 	<section class="h-100">
 		<div class="container h-100">
 
-			<ul class="navbar-nav ml-auto mt-10">
+		<a type="button" href="../index.php" class="btn btn-light mt-3">Back</a>
+			<!-- <ul class="navbar-nav ml-auto mt-10">
 				<li class="nav-item pt-3">
-					<a class="nav-link login-button" href="index.php">Back</a>
+					<a class="nav-link login-button" href="../index.php">Back</a>
 				</li>
 				
-			</ul>
+			</ul> -->
+
+
 
 			<div class="row justify-content-md-center h-100">
 				
