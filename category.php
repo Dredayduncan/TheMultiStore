@@ -210,470 +210,149 @@
 					</div>
 				</div>
 
-				<!-- Products -->
-
-				<?php
-					require 'simple_html_dom.php';
-
-					// Get the seacrh results from Jumia
-					function JumiaResults($searchTerm){
-						$context = stream_context_create(array(
-							'http' => array(
-								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
-							),
-						));
-
-						$html = file_get_html('https://www.jumia.com.gh/catalog/?q='.$searchTerm, false, $context);
-						$results = '';
-
-						for ($i = 0; $i < 15; $i++){
-							$name = $html->find(".info", $i)->find('h3', 0);
-							$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
-							$price = $html->find('.core', $i)->find('.prc', 0);
-							$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
-
-							$results.='<div class="col-sm-12 col-lg-4 col-md-6">
-											<!-- product card -->
-											<div class="product-item bg-light">
-												<div class="card">
-													<div class="thumb-content">
-														<div class="price">'.$price.'</div>
-														<a href="'.$link.'" target="_blank">
-															<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-														</a>
-													</div>
-													<div class="card-body">
-														<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
-														<ul class="list-inline product-meta">
-															<li class="list-inline-item">
-																<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>';
-						}
-						return $results;
-					}
-
-					// Get search results from Amazon
-					function AmazonResults($searchTerm){
-						$context = stream_context_create(array(
-							'http' => array(
-								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
-							),
-						));
-
-						$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss_2', false, $context);
-						$results = '';
-
-						for ($i = 0; $i < 15; $i++){
-							$name = $html->find(".a-size-base-plus", $i);
-							$img = $html->find(".s-image", $i)->getAttribute('src');
-							$price = $html->find('.a-price .a-offscreen', $i);
-							$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
-
-							$results.='<div class="col-sm-12 col-lg-4 col-md-6">
-											<!-- product card -->
-											<div class="product-item bg-light">
-												<div class="card">
-													<div class="thumb-content">
-														<div class="price">'.$price.'</div>
-														<a href="'.$link.'" target="_blank">
-															<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-														</a>
-													</div>
-													<div class="card-body">
-														<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
-														<ul class="list-inline product-meta">
-															<li class="list-inline-item">
-																<a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>';
-						}
-						return $results;
-					}
-
-					// Get search results from Amazon
-					function tonatonResults($searchTerm){
-						$context = stream_context_create(array(
-							'http' => array(
-								'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
-							),
-						));
-
-						$html = file_get_html('https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query='.$searchTerm, false, $context);
-						$results = '';
-
-						for ($i = 0; $i < 15; $i++){
-							$card = $html->find('.normal--2QYVk', $i);
-							$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
-							$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
-							$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
-	
-							$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
-							$results.='<div class="col-sm-12 col-lg-4 col-md-6">
-											<!-- product card -->
-											<div class="product-item bg-light">
-												<div class="card">
-													<div class="thumb-content">
-														<div class="price">'.$price.'</div>
-														<a href="'.$link.'" target="_blank">
-															<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-														</a>
-													</div>
-													<div class="card-body">
-														<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
-														<ul class="list-inline product-meta">
-															<li class="list-inline-item">
-																<a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>';
-						}
-						return $results;
-					}
-
-					if ($_POST['item']){
-						echo JumiaResults($item);
-						echo AmazonResults($item);
-						echo tonatonResults($item);
-					}
-					else{
-						$item = str_replace(' ', '+', $_GET['search']);
-						echo JumiaResults($item);
-						echo AmazonResults($item);
-						echo tonatonResults($item);
-					}
-					
-					
-					
-					die;
-				?>
+				
 				<div class="product-grid-list">
 					<div class="row mt-30">
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<!-- Products -->
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">Study Table Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php
+							require 'simple_html_dom.php';
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-3.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+							$context = stream_context_create(array(
+								'http' => array(
+									'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+								),
+							));
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+							// Get the seacrh results from Jumia
+							function JumiaResults($searchTerm, $context){
+								
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">Study Table Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+								$html = file_get_html('https://www.jumia.com.gh/catalog/?q='.$searchTerm, false, $context);
+								$results = '';
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-3.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+								for ($i = 0; $i < 15; $i++){
+									$name = $html->find(".info", $i)->find('h3', 0);
+									$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
+									$price = $html->find('.core', $i)->find('.prc', 0);
+									$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
+													<!-- product card -->
+													<div class="product-item bg-light">
+														<div class="card">
+															<div class="thumb-content">
+																<div class="price">'.$price.'</div>
+																<a href="'.$link.'" target="_blank">
+																	<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+																</a>
+															</div>
+															<div class="card-body">
+																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
+																<ul class="list-inline product-meta">
+																	<li class="list-inline-item">
+																		<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>';
+								}
+								return $results;
+							}
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-2.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">Study Table Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+							// Get search results from Amazon
+							function AmazonResults($searchTerm, $context){
+								
+								$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss_2', false, $context);
+								$results = '';
 
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="images/products/products-3.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+								for ($i = 0; $i < 15; $i++){
+									$name = $html->find(".a-size-base-plus", $i);
+									$img = $html->find(".s-image", $i)->getAttribute('src');
+									$price = $html->find('.a-price .a-offscreen', $i);
+									$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
+
+									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
+													<!-- product card -->
+													<div class="product-item bg-light">
+														<div class="card">
+															<div class="thumb-content">
+																<div class="price">'.$price.'</div>
+																<a href="'.$link.'" target="_blank">
+																	<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+																</a>
+															</div>
+															<div class="card-body">
+																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
+																<ul class="list-inline product-meta">
+																	<li class="list-inline-item">
+																		<a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>';
+								}
+								return $results;
+							}
+
+							// Get search results from Amazon
+							function tonatonResults($searchTerm, $context){
+								
+								$html = file_get_html('https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query='.$searchTerm, false, $context);
+								$results = '';
+
+								for ($i = 0; $i < 15; $i++){
+									$card = $html->find('.normal--2QYVk', $i);
+									$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
+									$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
+									$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
+			
+									$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
+									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
+													<!-- product card -->
+													<div class="product-item bg-light">
+														<div class="card">
+															<div class="thumb-content">
+																<div class="price">'.$price.'</div>
+																<a href="'.$link.'" target="_blank">
+																	<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
+																</a>
+															</div>
+															<div class="card-body">
+																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
+																<ul class="list-inline product-meta">
+																	<li class="list-inline-item">
+																		<a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>';
+								}
+								return $results;
+							}
+
+							if ($_POST['item']){
+								echo JumiaResults($item, $context);
+								echo AmazonResults($item, $context);
+								echo tonatonResults($item, $context);
+							}
+							else{
+								$item = str_replace(' ', '+', $_GET['search']);
+								echo JumiaResults($item, $context);
+								echo AmazonResults($item, $context);
+								echo tonatonResults($item, $context);
+							}
+							
+							
+							
+							die;
+						?>
 					</div>
 				</div>
 
