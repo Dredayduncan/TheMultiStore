@@ -37,31 +37,32 @@
 
 <body class="body-wrapper">
 
-	<section>
+<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<nav class="navbar navbar-expand-lg navbar-light navigation">
 						
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-						 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item active">
+								<li class="nav-item ">
 									<a class="nav-link" href="index.php">Home</a>
 								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="favourites.php">Favourites<span><i class=""></i></span>
+
+								<li class="nav-item active dropdown dropdown-slide">
+									<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
 									</a>
-	
+
 									
 								</li>
 								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">History<span><i class=""></i></span>
+									<a class="nav-link" href="History.php">History<span><i class=""></i></span>
 									</a>
-	
+
 									
 								</li>
 								<li class="nav-item dropdown dropdown-slide">
@@ -75,6 +76,7 @@
 								<li class="nav-item ">
 									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
 								</li>
+
 							</ul>
 							<ul>
 								<li class="nav-item dropdown show">
@@ -97,51 +99,30 @@
 									
 								</li>
 							</ul>
+								
 						</div>
 					</nav>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="page-search">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<!-- Advance Search -->
-					<div class="advance-search">
-					<form action='category.php' method='post'>
-							<div class="form-row">
-								<div class="form-group col-md-10">
-									<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" name='item' placeholder="What are you looking for">
-								</div>
-								
-								<div class="form-group col-md-2 align-self-center">
-									<!-- <a id='homeSearch' class="nav-link login-button border border-primary bg-primary text-white" href="category.php">Search</a> -->
-									<button type="submit" class="btn btn-primary">Search</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+
 
 	<section class="section-sm">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
-						<?php
-							if ($_POST['item']){
-								$item = str_replace(' ', '+', $_POST['item']);
-								echo "<h2>Results For ".$_POST['item']."</h2>";
-							}
-							else{
-								$product = $_GET['search'];
-								echo "<h2>Results For ".$product."</h2>";
-							}
-						?>
+						<!--// <?php
+						//	if ($_POST['item']){
+								//$item = str_replace(' ', '+', $_POST['item']);
+								//echo "<h2>Results For ".$_POST['item']."</h2>";
+							//}
+						//	else{
+							//	$product = $_GET['search'];
+							//	echo "<h2>Results For ".$product."</h2>";
+						//	}
+						//?> -->
 						
 						
 					</div>
@@ -176,11 +157,9 @@
 							<div class="view">
 								<strong>Views</strong>
 								<ul class="list-inline view-switcher">
+									
 									<li class="list-inline-item">
-										<a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
-									</li>
-									<li class="list-inline-item">
-										<a href="ad-list-view.php?search=<? echo $item; ?>"><i class="fa fa-reorder"></i></a>
+										<a href=""><i class="fa fa-reorder"></i></a>
 									</li>
 								</ul>
 							</div>
@@ -188,151 +167,14 @@
 					</div>
 				</div>
 
-				
+<!-- 				
 				<div class="product-grid-list">
-					<div class="row mt-30">
+					<div class="row mt-30"> -->
 						<!-- Products -->
 
-						<?php
-							require 'simple_html_dom.php';
-
-							$context = stream_context_create(array(
-								'http' => array(
-									'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
-								),
-							));
-
-							// Get the seacrh results from Jumia
-							function JumiaResults($searchTerm, $context){
-								
-
-								$html = file_get_html('https://www.jumia.com.gh/catalog/?q='.$searchTerm, false, $context);
-								$results = '';
-
-								for ($i = 0; $i < 15; $i++){
-									$name = $html->find(".info", $i)->find('h3', 0);
-									$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
-									$price = $html->find('.core', $i)->find('.prc', 0);
-									$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
-
-									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
-													<!-- product card -->
-													<div class="product-item bg-light">
-														<div class="card">
-															<div class="thumb-content">
-																<div class="price">'.$price.'</div>
-																<a href="'.$link.'" target="_blank">
-																	<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-																</a>
-															</div>
-															<div class="card-body">
-																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
-																<ul class="list-inline product-meta">
-																	<li class="list-inline-item">
-																		<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</div>';
-								}
-								return $results;
-							}
-
-							// Get search results from Amazon
-							function AmazonResults($searchTerm, $context){
-								
-								$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss_2', false, $context);
-								$results = '';
-
-								for ($i = 0; $i < 15; $i++){
-									$name = $html->find(".a-size-base-plus", $i);
-									$img = $html->find(".s-image", $i)->getAttribute('src');
-									$price = $html->find('.a-price .a-offscreen', $i);
-									$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
-
-									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
-													<!-- product card -->
-													<div class="product-item bg-light">
-														<div class="card">
-															<div class="thumb-content">
-																<div class="price">'.$price.'</div>
-																<a href="'.$link.'" target="_blank">
-																	<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-																</a>
-															</div>
-															<div class="card-body">
-																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
-																<ul class="list-inline product-meta">
-																	<li class="list-inline-item">
-																		<a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</div>';
-								}
-								return $results;
-							}
-
-							// Get search results from Amazon
-							function tonatonResults($searchTerm, $context){
-								
-								$html = file_get_html('https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query='.$searchTerm, false, $context);
-								$results = '';
-
-								for ($i = 0; $i < 15; $i++){
-									$card = $html->find('.normal--2QYVk', $i);
-									$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
-									$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
-									$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
-			
-									$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
-									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
-													<!-- product card -->
-													<div class="product-item bg-light">
-														<div class="card">
-															<div class="thumb-content">
-																<div class="price">'.$price.'</div>
-																<a href="'.$link.'" target="_blank">
-																	<img class="card-img-top img-fluid" src='.$img.' alt="Card image cap">
-																</a>
-															</div>
-															<div class="card-body">
-																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
-																<ul class="list-inline product-meta">
-																	<li class="list-inline-item">
-																		<a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</div>';
-								}
-								return $results;
-							}
-
-							if ($_POST['item']){
-								// echo JumiaResults($item, $context);
-								echo AmazonResults($item, $context);
-								echo tonatonResults($item, $context);
-							}
-							else{
-								$item = str_replace(' ', '+', $_GET['search']);
-								// echo JumiaResults($item, $context);
-								echo AmazonResults($item, $context);
-								echo tonatonResults($item, $context);
-							}
-							
-							
-							
-							die;
-						?>
-					</div>
-				</div>
+						<!--  -->
+					<!-- </div>
+				</div> -->
 
 				<!-- Pagination -->
 				<div class="pagination justify-content-center">
@@ -384,7 +226,7 @@
         <div class="block">
           <h4>Site Pages</h4>
           <ul>
-            <li><a href="#">Boston</a></li>
+            
             <li><a href="#">How It works</a></li>
             <li><a href="#">Deals & Coupons</a></li>
             <li><a href="#">Articls & Tips</a></li>
