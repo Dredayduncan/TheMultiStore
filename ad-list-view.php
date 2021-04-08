@@ -381,7 +381,6 @@
 					
 					}
 					
-					die;
                 ?>
 				<!-- ad listing list  -->
 

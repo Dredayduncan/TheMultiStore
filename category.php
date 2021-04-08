@@ -218,12 +218,6 @@
 						<?php
 							require 'simple_html_dom.php';
 
-							$context = stream_context_create(array(
-								'http' => array(
-									'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
-								),
-							));
-
 							// Get the seacrh results from Jumia
 							function JumiaResults($searchTerm, $context){
 								
@@ -265,7 +259,7 @@
 							// Get search results from Amazon
 							function AmazonResults($searchTerm, $context){
 								
-								$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss_2', false, $context);
+								$html = file_get_html('https://www.amazon.com/s?k='.$searchTerm.'&ref=nb_sb_noss', false, $context);
 								$results = '';
 
 								for ($i = 0; $i < 15; $i++){
@@ -337,6 +331,12 @@
 								return $results;
 							}
 
+							$context = stream_context_create(array(
+								'http' => array(
+									'header' => array('User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; rv:2.2) Gecko/20110201'),
+								),
+							));
+
 							if ($_POST['item']){
 								echo JumiaResults($item, $context);
 								echo AmazonResults($item, $context);
@@ -349,9 +349,6 @@
 								echo tonatonResults($item, $context);
 							}
 							
-							
-							
-							die;
 						?>
 					</div>
 				</div>

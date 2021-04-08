@@ -374,9 +374,7 @@
 	<script src="assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 	<script src="assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
-	<!-- google map -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-	<script src="plugins/google-map/gmap.js"></script>
+	
 	<script src="assets/js/script.js"></script>
 
 	<script>
