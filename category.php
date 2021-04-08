@@ -52,16 +52,16 @@
 								<li class="nav-item active">
 									<a class="nav-link" href="index.php">Home</a>
 								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="favourites.php">Favourites<span><i class=""></i></span>
+								<li class="nav-item ">
+									<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
 									</a>
-	
+
 									
 								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">History<span><i class=""></i></span>
+								<li class="nav-item">
+									<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
 									</a>
-	
+
 									
 								</li>
 								<li class="nav-item dropdown dropdown-slide">
@@ -148,7 +148,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3">
+				<!-- <div class="col-md-3">
 					<div class="category-sidebar">
 						<div class="widget category-list">
 							<h4 class="widget-header">All Category</h4>
@@ -158,16 +158,14 @@
 								<li><a href="category.php">Tonaton  <span>183</span></a></li>
 							</ul>
 						</div>		
-				</div>
-			</div>
+					</div>
+				</div> -->
 			<div class="col-md-9">
 				<div class="category-search-filter">
 					<div class="row">
 						<div class="col-md-6">
 							<strong>Sort</strong>
 							<select>
-								<option>Most Recent</option>
-								<option value="1">Most Popular</option>
 								<option value="2">Lowest to Highest</option>
 								<option value="3">Highest to Lowest</option>
 							</select>
@@ -316,14 +314,14 @@
 							));
 
 							if ($_POST['item']){
-								// echo JumiaResults($item, $context);
-								echo AmazonResults($item, $context);
+								echo JumiaResults($item, $context);
+								// echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							else{
 								$item = str_replace(' ', '+', $_GET['search']);
-								// echo JumiaResults($item, $context);
-								echo AmazonResults($item, $context);
+								echo JumiaResults($item, $context);
+								// echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							

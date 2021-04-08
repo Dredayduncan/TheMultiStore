@@ -117,7 +117,7 @@
 					<!-- Header Contetnt -->
 					<div class="content-block">
 						<h1>Search Anywhere & Everywhere </h1>
-						<p>Join the millions who rely on us <br> to provide the appropriate results for their enquiries</p>
+						<p>Where All Your Shops Are In One Place</p>
 						
 						
 					</div>

@@ -42,71 +42,63 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg navbar-light navigation">
-					<a class="navbar-brand" href="index.php">
-						<img src="images/logo.png" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="index.php">Home</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">Dashboard<span><i class="fa fa-angle-down"></i></span>
-								</a>
+			<nav class="navbar navbar-expand-lg navbar-light navigation">
+						
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+						 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto main-nav ">
+								<li class="nav-item active">
+									<a class="nav-link" href="index.php">Home</a>
+								</li>
+								<li class="nav-item dropdown dropdown-slide">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="favourites.php">Favourites<span><i class=""></i></span>
+									</a>
+	
+									
+								</li>
+								<li class="nav-item dropdown dropdown-slide">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="">History<span><i class=""></i></span>
+									</a>
+	
+								</li>
+								<li class="nav-item dropdown dropdown-slide">
+									<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<span><i class=""></i></span>
+									</a>
+									
+								</li>
+							</ul>
+							<ul class="navbar-nav ml-auto mt-10">
+								<li class="nav-item ">
+									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
+								</li>
+							</ul>
+							<ul>
+								<li class="nav-item dropdown show">
+									<div class="drop">
+										<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+											<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+											<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+											</svg>
+											
+										</a>
 
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-									<a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-									<a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-									<a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-									<a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="about-us.html">About Us</a>
-									<a class="dropdown-item" href="contact-us.html">Contact Us</a>
-									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-									<a class="dropdown-item" href="404.html">404 Page</a>
-									<a class="dropdown-item" href="package.html">Package</a>
-									<a class="dropdown-item" href="single.html">Single Page</a>
-									<a class="dropdown-item" href="store.html">Store Single</a>
-									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-									<a class="dropdown-item" href="blog.html">Blog</a>
-
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="category.php">Ad-Gird View</a>
-									<a class="dropdown-item" href="ad-listing-list.html">Ad-List View</a>
-								</div>
-							</li>
-						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="login.php">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="ad-listing.html"><i class="fa fa-plus-circle"></i> Add Listing</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
+										<!-- Dropdown menu for user profile -->
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+											<a class="dropdown-item" href="#">User Profile</a>
+											<a class="dropdown-item" href="#">Log out</a>
+											
+										</div>
+									</div>
+									
+								</li>
+							</ul>
+						</div>
+					</nav>
 			</div>
 		</div>
 	</div>
@@ -160,12 +152,11 @@
                         
                         }
 					?>
-					<p>123 Results on 12 December, 2017</p>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-3 col-md-4">
+		<!-- <div class="row"> -->
+			<!-- <div class="col-lg-3 col-md-4">
 				<div class="category-sidebar">
 					<div class="widget category-list">
             <h4 class="widget-header">All Category</h4>
@@ -174,30 +165,17 @@
               <li><a href="category.php">Jumia <span>233</span></a></li>
               <li><a href="category.php">Tonaton  <span>183</span></a></li>
 	          </ul>
-          </div>
+          </div> -->
 
 
-          <div class="widget filter">
-            <h4 class="widget-header">Show Produts</h4>
-            <select>
-              <option>Popularity</option>
-              <option value="1">Top rated</option>
-              <option value="2">Lowest Price</option>
-              <option value="4">Highest Price</option>
-            </select>
-          </div>
-
-          <div class="widget price-range w-100">
-            <h4 class="widget-header">Price Range</h4>
-            <div class="block">
-              <input class="range-track w-100" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="5" data-slider-value="[0,5000]">
-                <div class="d-flex justify-content-between mt-2">
-                    <span class="value">$10 - $5000</span>
-                </div>
-            </div>
-          </div>
-				</div>
+			<!-- <div class="widget filter">
+			<h4 class="widget-header">Show Produts</h4>
+				<select>
+					<option value="2">Lowest to Highest</option>
+					<option value="3">Highest to Lowest</option>
+				</select>
 			</div>
+		</div> -->
 
 			<div class="col-lg-9 col-md-8">
 				<div class="category-search-filter">
@@ -205,10 +183,8 @@
 						<div class="col-md-6">
 							<strong>Sort</strong>
 							<select>
-								<option>Most Recent</option>
-								<option value="1">Most Popular</option>
-								<option value="2">Lowest Price</option>
-								<option value="4">Highest Price</option>
+								<option value="2">Lowest to Highest</option>
+								<option value="3">Highest to Lowest</option>
 							</select>
 						</div>
 						<div class="col-md-6">
@@ -370,13 +346,13 @@
 
                     if ($_GET['search']){
 						$item = str_replace(' ', '+', $_GET['search']);
-						// echo JumiaResults($item);
-						echo AmazonResults($item);
+						echo JumiaResults($item);
+						// echo AmazonResults($item);
 						echo tonatonResults($item);
 					}
 					else{
-						// echo JumiaResults($item);
-						echo AmazonResults($item);
+						echo JumiaResults($item);
+						// echo AmazonResults($item);
 						echo tonatonResults($item);
 					
 					}
