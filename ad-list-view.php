@@ -370,12 +370,12 @@
 
                     if ($_GET['search']){
 						$item = str_replace(' ', '+', $_GET['search']);
-						echo JumiaResults($item);
+						// echo JumiaResults($item);
 						echo AmazonResults($item);
 						echo tonatonResults($item);
 					}
 					else{
-						echo JumiaResults($item);
+						// echo JumiaResults($item);
 						echo AmazonResults($item);
 						echo tonatonResults($item);
 					
