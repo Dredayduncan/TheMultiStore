@@ -28,5 +28,16 @@ create table History(
     `name` varchar(50) NOT NULL,
     img varchar(255),
     link varchar(255) NOT NULL,
-    price float
+    price float,
+    store varchar(50)
+);
+
+create table Favourites(
+	username varchar(50),
+    foreign key(username) references Users(username),
+    `name` varchar(50) NOT NULL,
+    img varchar(255),
+    link varchar(255) NOT NULL,
+    price float,
+    store varchar(50)
 );

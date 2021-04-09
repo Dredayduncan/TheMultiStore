@@ -35,6 +35,66 @@
 
 </head>
 
+<?php
+
+	// Get config file
+	include 'auth/config.php';
+
+	// write query
+	session_start();
+
+	if (isset($_GET['logout'])){
+		session_destroy();
+		header('Refresh: 0; url=index.php');
+	}
+
+	// Menu to display if a user is logged in
+	$login = '<ul class="navbar-nav ml-auto mt-10">
+		<li class="nav-item ">
+			<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
+		</li>
+
+	</ul>';
+
+	$logMenu = '';
+
+	if (isset($_SESSION['username'])){
+		$login = '<ul>
+			<li class="nav-item dropdown show">
+				<div class="drop">
+					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+						</svg>
+						
+					</a>
+
+					<!-- Dropdown menu for user profile -->
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="#">User Profile</a>
+						<a class="dropdown-item" href="index.php?logout=yes">Log out</a>
+						
+					</div>
+				</div>
+				
+			</li>
+		</ul>';
+
+	$logMenu = '<li class="nav-item ">
+			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
+			</a>
+		</li>';
+	}
+
+
+?>
+
+
 <body class="body-wrapper">
 
 <section>
@@ -53,53 +113,9 @@
 									<a class="nav-link" href="index.php">Home</a>
 								</li>
 
-								<li class="nav-item  dropdown dropdown-slide">
-									<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
-									</a>
-
-									
-								</li>
-								<li class="nav-item active dropdown dropdown-slide">
-									<a class="nav-link" href="History.php">History<span><i class=""></i></span>
-									</a>
-
-									
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span><i class=""></i></span>
-									</a>
-									
-								</li>
+								<?php echo $logMenu; ?>
 							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item ">
-									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
-								</li>
-
-							</ul>
-							<ul>
-								<li class="nav-item dropdown show">
-									<div class="drop">
-										<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-											<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-											<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-											</svg>
-											
-										</a>
-
-										<!-- Dropdown menu for user profile -->
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											<a class="dropdown-item" href="#">User Profile</a>
-											<a class="dropdown-item" href="#">Log out</a>
-											
-										</div>
-									</div>
-									
-								</li>
-							</ul>
-								
+							<?php echo $login; ?>
 						</div>
 					</nav>
 				</div>
@@ -113,6 +129,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
+					<h2>History</h2>
 						<!--// <?php
 						//	if ($_POST['item']){
 								//$item = str_replace(' ', '+', $_POST['item']);
@@ -129,7 +146,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3">
+				<!-- <div class="col-md-3">
 					<div class="category-sidebar">
 						<div class="widget category-list">
 							<h4 class="widget-header">All Category</h4>
@@ -139,33 +156,64 @@
 								<li><a href="category.php">Tonaton  <span>183</span></a></li>
 							</ul>
 						</div>		
-				</div>
-			</div>
+					</div>
+				</div> -->
 			<div class="col-md-9">
 				<div class="category-search-filter">
 					<div class="row">
 						<div class="col-md-6">
 							<strong>Sort</strong>
 							<select>
-								<option>Most Recent</option>
-								<option value="1">Most Popular</option>
 								<option value="2">Lowest to Highest</option>
 								<option value="3">Highest to Lowest</option>
 							</select>
 						</div>
-						<div class="col-md-6">
-							<div class="view">
-								<strong>Views</strong>
-								<ul class="list-inline view-switcher">
-									
-									<li class="list-inline-item">
-										<a href=""><i class="fa fa-reorder"></i></a>
-									</li>
-								</ul>
+					</div>
+				</div>
+			</div>
+
+			<?php
+			// Get the User favourites
+
+			$sql = "SELECT * FROM History WHERE username='".$_SESSION["username"]."'";
+
+			// execute query
+			$result = mysqli_query($conn, $sql);
+
+			if(!$result){
+				die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+			}else{
+
+				while ($data = mysqli_fetch_array($result)){
+
+					echo '<div class="ad-listing-list mt-20">
+					<div class="row p-lg-3 p-sm-5 p-4">
+						<div class="col-lg-4 align-self-center">
+							<div class="price">'.$data['price'].'</div>
+							<a href="'.$data['link'].'">
+								<img src="'.$data['img'].'" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="col-lg-8">
+							<div class="row">
+								<div class="col-lg-6 col-md-10">
+									<div class="ad-listing-content">
+										<div>
+											<a href="'.$data['link'].'" class="font-weight-bold">'.$data['name'].'</a>
+										</div>
+										<ul class="list-inline mt-2 mb-3">
+											<li class="list-inline-item"><a href="'.$data['link'].'"><i class="fa fa-tag"></i>'.$data['store'].'</a></li>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>';
+				}
+	
+			}
+		?>
 
 <!-- 				
 				<div class="product-grid-list">
@@ -202,82 +250,7 @@
 		</div>
 	</div>
 </section>
-<!--============================
-=            Footer            =
-=============================-->
 
-<footer class="footer section section-sm">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0">
-        <!-- About -->
-        <div class="block about">
-          <!-- footer logo -->
-          <img src="images/logo-footer.png" alt="">
-          <!-- description -->
-          <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 offset-lg-1 col-md-3">
-        <div class="block">
-          <h4>Site Pages</h4>
-          <ul>
-            
-            <li><a href="#">How It works</a></li>
-            <li><a href="#">Deals & Coupons</a></li>
-            <li><a href="#">Articls & Tips</a></li>
-            <li><a >Terms & Conditions</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
-        <div class="block">
-          <h4>Admin Pages</h4>
-          <ul>
-            <li><a >Category</a></li>
-            <li><a >Single Page</a></li>
-            <li><a >Store Single</a></li>
-            <li><a >Single Post</a>
-            </li>
-            <li><a >Blog</a></li>
-
-
-
-          </ul>
-        </div>
-      </div>
-      
-  </div>
-  <!-- Container End -->
-</footer>
-<!-- Footer Bottom -->
-<footer class="footer-bottom">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-12">
-        <!-- Copyright -->
-        <div class="copyright">
-          <p>Copyright © <script>
-              var CurrentYear = new Date().getFullYear()
-              document.write(CurrentYear)
-            </script>. All Rights Reserved, theme by <a class="text-primary" href="https://themefisher.com" target="_blank">themefisher.com</a></p>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  <!-- Container End -->
-  <!-- To Top -->
-  <div class="top-to">
-    <a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-  </div>
-</footer>
 
 <!-- JAVASCRIPTS -->
 <script src="assets/plugins/jQuery/jquery.min.js"></script>
@@ -291,9 +264,6 @@
 <script src="assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
-<!-- google map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-<script src="plugins/google-map/gmap.js"></script>
 <script src="assets/js/script.js"></script>
 
 </body>

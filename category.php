@@ -35,6 +35,64 @@
 
 </head>
 
+
+<?php
+
+	// write query
+	session_start();
+
+	if (isset($_GET['logout'])){
+		session_destroy();
+		header('Refresh: 0; url=index.php');
+	}
+
+	// Menu to display if a user is logged in
+	$login = '<ul class="navbar-nav ml-auto mt-10">
+		<li class="nav-item ">
+			<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
+		</li>
+
+	</ul>';
+
+	$logMenu = '';
+
+	if (isset($_SESSION['username'])){
+		$login = '<ul>
+			<li class="nav-item dropdown show">
+				<div class="drop">
+					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+						</svg>
+						
+					</a>
+
+					<!-- Dropdown menu for user profile -->
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="#">User Profile</a>
+						<a class="dropdown-item" href="index.php?logout=yes">Log out</a>
+						
+					</div>
+				</div>
+				
+			</li>
+		</ul>';
+
+	$logMenu = '<li class="nav-item ">
+			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
+			</a>
+		</li>';
+	}
+
+
+?>
+
+
 <body class="body-wrapper">
 
 	<section>
@@ -52,51 +110,9 @@
 								<li class="nav-item active">
 									<a class="nav-link" href="index.php">Home</a>
 								</li>
-								<li class="nav-item ">
-									<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
-									</a>
-
-									
-								</li>
-								<li class="nav-item">
-									<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
-									</a>
-
-									
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span><i class=""></i></span>
-									</a>
-									
-								</li>
+								<?php echo $logMenu; ?>
 							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item ">
-									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
-								</li>
-							</ul>
-							<ul>
-								<li class="nav-item dropdown show">
-									<div class="drop">
-										<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-											<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-											<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-											</svg>
-											
-										</a>
-
-										<!-- Dropdown menu for user profile -->
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											<a class="dropdown-item" href="#">User Profile</a>
-											<a class="dropdown-item" href="#">Log out</a>
-											
-										</div>
-									</div>
-									
-								</li>
-							</ul>
+							<?php echo $login; ?>
 						</div>
 					</nav>
 				</div>
@@ -133,7 +149,7 @@
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
 						<?php
-							if ($_POST['item']){
+							if (isset($_POST['item'])){
 								$item = str_replace(' ', '+', $_POST['item']);
 								echo "<h2>Results For ".$_POST['item']."</h2>";
 							}
@@ -313,7 +329,7 @@
 								),
 							));
 
-							if ($_POST['item']){
+							if (isset($_POST['item'])){
 								echo JumiaResults($item, $context);
 								// echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
@@ -444,9 +460,6 @@
 <script src="assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
-<!-- google map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-<script src="plugins/google-map/gmap.js"></script>
 <script src="assets/js/script.js"></script>
 
 </body>

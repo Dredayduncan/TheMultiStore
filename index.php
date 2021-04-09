@@ -35,6 +35,62 @@
 
 </head>
 
+<?php
+
+	// write query
+	session_start();
+
+	if (isset($_GET['logout'])){
+		session_destroy();
+		header('Refresh: 0; url=index.php');
+	}
+
+	// Menu to display if a user is logged in
+	$login = '<ul class="navbar-nav ml-auto mt-10">
+		<li class="nav-item ">
+			<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
+		</li>
+
+	</ul>';
+
+	$logMenu = '';
+
+	if (isset($_SESSION['username'])){
+		$login = '<ul>
+			<li class="nav-item dropdown show">
+				<div class="drop">
+					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+						</svg>
+						
+					</a>
+
+					<!-- Dropdown menu for user profile -->
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="#">User Profile</a>
+						<a class="dropdown-item" href="index.php?logout=yes">Log out</a>
+						
+					</div>
+				</div>
+				
+			</li>
+		</ul>';
+
+	$logMenu = '<li class="nav-item ">
+			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
+			</a>
+		</li>';
+	}
+
+
+?>
+
 <body class="body-wrapper">
 	<section>
 		<div class="container">
@@ -51,52 +107,11 @@
 								<li class="nav-item active">
 									<a class="nav-link" href="index.php">Home</a>
 								</li>
-								<li class="nav-item ">
-									<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
-									</a>
-
-									
-								</li>
-								<li class="nav-item">
-									<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
-									</a>
-
-									
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<span><i class=""></i></span>
-									</a>
-									
-								</li>
+								
+								<?php echo $logMenu; ?>
+								
 							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item ">
-									<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
-								</li>
-
-							</ul>
-							<ul>
-								<li class="nav-item dropdown show">
-									<div class="drop">
-										<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-											<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-											<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-											</svg>
-											
-										</a>
-
-										<!-- Dropdown menu for user profile -->
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-											<a class="dropdown-item" href="#">User Profile</a>
-											<a class="dropdown-item" href="#">Log out</a>
-											
-										</div>
-									</div>
-									
-								</li>
-							</ul>
+							<?php echo $login; ?>
 								
 						</div>
 					</nav>
@@ -326,64 +341,6 @@
 		</div>
 	</section>
 
-
-
-
-
-
-<!--============================
-=            Footer            =
-=============================-->
-
-	<footer class="footer section section-sm">
-		<!-- Container Start -->
-		<div class="container">
-		<div class="row">
-			<div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0">
-			<!-- About -->
-			<div class="block about">
-				<!-- footer logo -->
-				<img src="images/logo-footer.png" alt="">
-				<!-- description -->
-				<p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-				incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-				laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			</div>
-			<!-- Link list -->
-			<div class="col-lg-2 offset-lg-1 col-md-3">
-			<div class="block">
-				<h4>Site Pages</h4>
-				<ul>
-				<li><a href="#">Boston</a></li>
-				<li><a href="#">How It works</a></li>
-				<li><a href="#">Deals & Coupons</a></li>
-				<li><a href="#">Articls & Tips</a></li>
-				
-				</ul>
-			</div>
-			</div>
-			<!-- Link list -->
-			<div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
-			<div class="block">
-				<h4>Admin Pages</h4>
-				<ul>
-				<li><a >Category</a></li>
-				<li><a >Single Page</a></li>
-				<li><a >Store Single</a></li>
-				<li><a >Single Post</a>
-				</li>
-				<li><a>Blog</a></li>
-	
-	
-	
-				</ul>
-			</div>
-			</div>
-			
-		</div>
-	<!-- Container End -->
-  </footer>
 
 	<!-- JAVASCRIPTS -->
 	<script src="assets/plugins/jQuery/jquery.min.js"></script>
