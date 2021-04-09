@@ -238,6 +238,13 @@
 																<ul class="list-inline product-meta">
 																	<li class="list-inline-item">
 																		<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
+																		<a>
+																		<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+																				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+																			</svg>
+																		
+																		</a>
 																	</li>
 																</ul>
 															</div>
@@ -275,6 +282,14 @@
 																<ul class="list-inline product-meta">
 																	<li class="list-inline-item">
 																		<a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a>
+																		<a>
+																		<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+																				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+																			</svg>
+																		
+																		</a>
+							
 																	</li>
 																</ul>
 															</div>
@@ -285,7 +300,7 @@
 								return $results;
 							}
 
-							// Get search results from Amazon
+							// Get search results from Tonaton
 							function tonatonResults($searchTerm, $context){
 								
 								$html = file_get_html('https://tonaton.com/en/ads/ghana?sort=relevance&buy_now=0&urgent=0&query='.$searchTerm, false, $context);
@@ -311,10 +326,22 @@
 															<div class="card-body">
 																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
 																<ul class="list-inline product-meta">
-																	<li class="list-inline-item">
+																	<li class="d-flex list-inline-item justify-content-between">
 																		<a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a>
+																		<a>
+																		<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+																				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+																			</svg>
+																		
+																		</a>
+																		
+																		
+																		
 																	</li>
 																</ul>
+
+																
 															</div>
 														</div>
 													</div>
@@ -331,13 +358,13 @@
 
 							if (isset($_POST['item'])){
 								echo JumiaResults($item, $context);
-								// echo AmazonResults($item, $context);
+								echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							else{
 								$item = str_replace(' ', '+', $_GET['search']);
 								echo JumiaResults($item, $context);
-								// echo AmazonResults($item, $context);
+								echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							
