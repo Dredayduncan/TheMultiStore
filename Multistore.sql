@@ -13,7 +13,8 @@ create table Users(
     primary key(username),
     password varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
-    DOB date NOT NULL
+    DOB date NOT NULL,
+    token int(6) NOT NULL
 );
 
 create table SearchHistory(
