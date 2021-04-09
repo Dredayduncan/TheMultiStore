@@ -79,11 +79,11 @@
 		</ul>';
 
 	$logMenu = '<li class="nav-item ">
-			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
+			<a class="nav-link"  href="views/favourites.php">Favourites<span><i class=""></i></span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
+			<a class="nav-link"  href="views/History.php">History<span><i class=""></i></span>
 			</a>
 		</li>';
 	}
@@ -141,7 +141,7 @@
 						<div class="container">
 							<div class="row justify-content-center">
 								<div class="col-lg-6 col-md-12 align-content-center">
-									<form action='category.php' method='post'>
+									<form action='views/category.php' method='post'>
 										<div class="form-row">
 											<div class="form-group col-md-10">
 												<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" name='item' placeholder="What are you looking for">

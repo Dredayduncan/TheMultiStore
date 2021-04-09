@@ -8,22 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TheMultiStore</title>
   
-  <link href="assets/images/MultistoreIcon.png" rel="shortcut icon">
+  <link href="../assets/images/MultistoreIcon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
   <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap-slider.css">
+  <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap-slider.css">
   <!-- Font Awesome -->
-  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="assets/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="assets/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="../assets/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="../assets/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="assets/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="assets/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="../assets/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="../assets/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,11 +35,10 @@
 
 </head>
 
-
 <?php
 
 	// Get config file
-	include 'auth/config.php';
+	include '../auth/config.php';
 
 	// write query
 	session_start();
@@ -52,7 +51,7 @@
 	// Menu to display if a user is logged in
 	$login = '<ul class="navbar-nav ml-auto mt-10">
 		<li class="nav-item ">
-			<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
+			<a class="nav-link login-button border border-success bg-success text-white" href="../auth/login.php">Login</a>
 		</li>
 
 	</ul>';
@@ -95,6 +94,7 @@
 
 ?>
 
+
 <body class="body-wrapper">
 
 <section>
@@ -110,13 +110,12 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto main-nav ">
 								<li class="nav-item ">
-									<a class="nav-link" href="index.php">Home</a>
+									<a class="nav-link" href="../index.php">Home</a>
 								</li>
 
 								<?php echo $logMenu; ?>
 							</ul>
 							<?php echo $login; ?>
-								
 						</div>
 					</nav>
 				</div>
@@ -130,7 +129,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
-					<h2>Favourites</h2>
+					<h2>History</h2>
 						<!--// <?php
 						//	if ($_POST['item']){
 								//$item = str_replace(' ', '+', $_POST['item']);
@@ -157,8 +156,8 @@
 								<li><a href="category.php">Tonaton  <span>183</span></a></li>
 							</ul>
 						</div>		
+					</div>
 				</div> -->
-			</div>
 			<div class="col-md-9">
 				<div class="category-search-filter">
 					<div class="row">
@@ -171,52 +170,50 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
 			<?php
-				// Get the User favourites
+			// Get the User favourites
 
-				$sql = "SELECT * FROM Favourites WHERE username='".$_SESSION["username"]."'";
+			$sql = "SELECT * FROM History WHERE username='".$_SESSION["username"]."'";
 
-				// execute query
-				$result = mysqli_query($conn, $sql);
+			// execute query
+			$result = mysqli_query($conn, $sql);
 
-				if(!$result){
-				  die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
-				}else{
+			if(!$result){
+				die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+			}else{
 
-					while ($data = mysqli_fetch_array($result)){
+				while ($data = mysqli_fetch_array($result)){
 
-						echo '<div class="ad-listing-list mt-20">
-						<div class="row p-lg-3 p-sm-5 p-4">
-							<div class="col-lg-4 align-self-center">
-								<div class="price">'.$data['price'].'</div>
-								<a href="'.$data['link'].'">
-									<img src="'.$data['img'].'" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="col-lg-8">
-								<div class="row">
-									<div class="col-lg-6 col-md-10">
-										<div class="ad-listing-content">
-											<div>
-												<a href="'.$data['link'].'" class="font-weight-bold">'.$data['name'].'</a>
-											</div>
-											<ul class="list-inline mt-2 mb-3">
-												<li class="list-inline-item"><a href="'.$data['link'].'"><i class="fa fa-tag"></i>'.$data['store'].'</a></li>
-											</ul>
+					echo '<div class="ad-listing-list mt-20">
+					<div class="row p-lg-3 p-sm-5 p-4">
+						<div class="col-lg-4 align-self-center">
+							<div class="price">'.$data['price'].'</div>
+							<a href="'.$data['link'].'">
+								<img src="'.$data['img'].'" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="col-lg-8">
+							<div class="row">
+								<div class="col-lg-6 col-md-10">
+									<div class="ad-listing-content">
+										<div>
+											<a href="'.$data['link'].'" class="font-weight-bold">'.$data['name'].'</a>
 										</div>
+										<ul class="list-inline mt-2 mb-3">
+											<li class="list-inline-item"><a href="'.$data['link'].'"><i class="fa fa-tag"></i>'.$data['store'].'</a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>';
-					}
-		
+					</div>
+				</div>';
 				}
-			?>
+	
+			}
+		?>
 
-				
 <!-- 				
 				<div class="product-grid-list">
 					<div class="row mt-30"> -->
@@ -255,18 +252,18 @@
 
 
 <!-- JAVASCRIPTS -->
-<script src="assets/plugins/jQuery/jquery.min.js"></script>
-<script src="assets/plugins/bootstrap/js/popper.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap-slider.js"></script>
+<script src="../assets/plugins/jQuery/jquery.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap-slider.js"></script>
   <!-- tether js -->
-<script src="assets/plugins/tether/js/tether.min.js"></script>
-<script src="assets/plugins/raty/jquery.raty-fa.js"></script>
-<script src="assets/plugins/slick-carousel/slick/slick.min.js"></script>
-<script src="assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
-<script src="assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="../assets/plugins/tether/js/tether.min.js"></script>
+<script src="../assets/plugins/raty/jquery.raty-fa.js"></script>
+<script src="../assets/plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="../assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="../assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </body>
 

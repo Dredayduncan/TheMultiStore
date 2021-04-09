@@ -14,7 +14,7 @@ create table Users(
     password varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     DOB date NOT NULL,
-    token int(6) NOT NULL
+    token int(6)
 );
 
 create table SearchHistory(

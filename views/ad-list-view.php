@@ -9,22 +9,22 @@
   <title>TheMultiStore</title>
   
   <!-- FAVICON -->
-  <link href="assets/images/MultistoreIcon.png" rel="shortcut icon">
+  <link href="../assets/images/MultistoreIcon.png" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
   <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap-slider.css">
+  <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap-slider.css">
   <!-- Font Awesome -->
-  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="assets/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="assets/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="../assets/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="../assets/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="assets/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="assets/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="../assets/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="../assets/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -49,7 +49,7 @@
 	// Menu to display if a user is logged in
 	$login = '<ul class="navbar-nav ml-auto mt-10">
 		<li class="nav-item ">
-			<a class="nav-link login-button border border-success bg-success text-white" href="auth/login.php">Login</a>
+			<a class="nav-link login-button border border-success bg-success text-white" href="../auth/login.php">Login</a>
 		</li>
 
 	</ul>';
@@ -107,7 +107,7 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto main-nav ">
 								<li class="nav-item active">
-									<a class="nav-link" href="index.php">Home</a>
+									<a class="nav-link" href="../index.php">Home</a>
 								</li>
 								<?php echo $logMenu; ?>
 							</ul>
@@ -141,7 +141,6 @@
 									<input type="text" class="form-control my-2 my-lg-1" id="inputLocation4" placeholder="Location">
 								</div> -->
 								<div class="form-group col-md-2 align-self-center">
-									<!-- <a id='homeSearch' class="nav-link login-button border border-primary bg-primary text-white" href="category.php">Search</a> -->
 									<button type="submit" class="btn btn-primary">Search</button>
 								</div>
 							</div>
@@ -506,18 +505,18 @@
 </footer>
 
 <!-- JAVASCRIPTS -->
-<script src="assets/plugins/jQuery/jquery.min.js"></script>
-<script src="assets/plugins/bootstrap/js/popper.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap-slider.js"></script>
+<script src="../assets/plugins/jQuery/jquery.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap-slider.js"></script>
   <!-- tether js -->
-<script src="assets/plugins/tether/js/tether.min.js"></script>
-<script src="assets/plugins/raty/jquery.raty-fa.js"></script>
-<script src="assets/plugins/slick-carousel/slick/slick.min.js"></script>
-<script src="assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-<script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
-<script src="assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="../assets/plugins/tether/js/tether.min.js"></script>
+<script src="../assets/plugins/raty/jquery.raty-fa.js"></script>
+<script src="../assets/plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="../assets/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="../assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="../assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </body>
 
