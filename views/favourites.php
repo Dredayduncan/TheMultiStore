@@ -176,7 +176,7 @@
 			<?php
 				// Get the User favourites
 
-				$sql = "SELECT * FROM Favourites WHERE username='".$_SESSION["username"]."'";
+				$sql = "SELECT * FROM Favourites WHERE username='".$_SESSION["username"]."' order by time desc";
 
 				// execute query
 				$result = mysqli_query($conn, $sql);
@@ -190,7 +190,7 @@
 						echo '<div class="ad-listing-list mt-20">
 						<div class="row p-lg-3 p-sm-5 p-4">
 							<div class="col-lg-4 align-self-center">
-								<div class="price">'.$data['price'].'</div>
+								
 								<a href="'.$data['link'].'">
 									<img src="'.$data['img'].'" class="img-fluid" alt="">
 								</a>
@@ -201,9 +201,10 @@
 										<div class="ad-listing-content">
 											<div>
 												<a href="'.$data['link'].'" class="font-weight-bold">'.$data['name'].'</a>
+												<div class="price">'.$data['price'].'</div>
 											</div>
 											<ul class="list-inline mt-2 mb-3">
-												<li class="list-inline-item"><a href="'.$data['link'].'"><i class="fa fa-tag"></i>'.$data['store'].'</a></li>
+												<li class="list-inline-item"><a class="store"  href="'.$data['link'].'"><i class="fa fa-tag">'.$data['store'].'</i></a></li>
 												<a>
 												<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -275,6 +276,23 @@
 <script src="../assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="../assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
 <script src="../assets/js/script.js"></script>
+
+<script>
+	// Delete from Favourites
+	$(".btn").on('click', function(){
+		var div = $(this).parent().parent();
+		var name = div.find("div a").html();
+		var price = div.find('.price').html().trim();
+		var store = div.find(".store i").html();
+		var img = div.parent().parent().parent().prev().find(".img-fluid").attr("src");
+		var link = div.find("div a").attr("href");
+		
+		$.get("control.php", {choice: 'fav_delete', name: name, img: img,
+		link: link, price: price, store: store}, function(data){
+			location.reload();
+		});
+	});
+</script>
 
 </body>
 

@@ -71,7 +71,7 @@
 					<!-- Dropdown menu for user profile -->
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="#">User Profile</a>
-						<a class="dropdown-item" href="index.php?logout=yes">Log out</a>
+						<a class="dropdown-item" href="../index.php?logout=yes">Log out</a>
 						
 					</div>
 				</div>
@@ -159,7 +159,6 @@
 							}
 						?>
 						
-						
 					</div>
 				</div>
 			</div>
@@ -218,9 +217,9 @@
 								$results = '';
 
 								for ($i = 0; $i < 15; $i++){
-									$name = $html->find(".info", $i)->find('h3', 0);
+									$name = $html->find(".info", $i)->find('h3', 0)->text();
 									$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
-									$price = $html->find('.core', $i)->find('.prc', 0);
+									$price = $html->find('.core', $i)->find('.prc', 0)->text();
 									$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
 
 									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
@@ -237,10 +236,10 @@
 																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
 																<ul class="list-inline product-meta">
 																	<li class="list-inline-item">
-																		<a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a>
+																		<a class="store"  href="'.$link.'"><i class="fa fa-tag">Jumia</i></a>
 																		<a>
 																		<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 																				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
 																			</svg>
 																		
@@ -262,9 +261,9 @@
 								$results = '';
 
 								for ($i = 0; $i < 15; $i++){
-									$name = $html->find(".a-size-base-plus", $i);
+									$name = $html->find(".a-size-base-plus", $i)->text();
 									$img = $html->find(".s-image", $i)->getAttribute('src');
-									$price = $html->find('.a-price .a-offscreen', $i);
+									$price = $html->find('.a-price .a-offscreen', $i)->text();
 									$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
 
 									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
@@ -281,10 +280,10 @@
 																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
 																<ul class="list-inline product-meta">
 																	<li class="list-inline-item">
-																		<a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a>
+																		<a class="store"  href="'.$link.'"><i class="fa fa-tag">Amazon</i></a>
 																		<a>
 																		<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 																				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
 																			</svg>
 																		
@@ -308,9 +307,9 @@
 
 								for ($i = 0; $i < 15; $i++){
 									$card = $html->find('.normal--2QYVk', $i);
-									$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
+									$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0)->text();
 									$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
-									$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
+									$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0)->text();
 			
 									$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
 									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
@@ -327,10 +326,10 @@
 																<h4 class="card-title"><a href="'.$link.'" target="_blank">'.$name.'</a></h4>
 																<ul class="list-inline product-meta">
 																	<li class="d-flex list-inline-item justify-content-between">
-																		<a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a>
+																		<a class="store" href="'.$link.'"><i class="fa fa-tag">Tonaton</i></a>
 																		<a>
-																		<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+																		<button type="button" id="fav-button" class="btn" style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 																				<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
 																			</svg>
 																		
@@ -358,13 +357,13 @@
 
 							if (isset($_POST['item'])){
 								echo JumiaResults($item, $context);
-								echo AmazonResults($item, $context);
+								// echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							else{
 								$item = str_replace(' ', '+', $_GET['search']);
 								echo JumiaResults($item, $context);
-								echo AmazonResults($item, $context);
+								// echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							
@@ -398,82 +397,6 @@
 		</div>
 	</div>
 </section>
-<!--============================
-=            Footer            =
-=============================-->
-
-<footer class="footer section section-sm">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0">
-        <!-- About -->
-        <div class="block about">
-          <!-- footer logo -->
-          <img src="images/logo-footer.png" alt="">
-          <!-- description -->
-          <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 offset-lg-1 col-md-3">
-        <div class="block">
-          <h4>Site Pages</h4>
-          <ul>
-            <li><a href="#">Boston</a></li>
-            <li><a href="#">How It works</a></li>
-            <li><a href="#">Deals & Coupons</a></li>
-            <li><a href="#">Articls & Tips</a></li>
-            <li><a >Terms & Conditions</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
-        <div class="block">
-          <h4>Admin Pages</h4>
-          <ul>
-            <li><a >Category</a></li>
-            <li><a >Single Page</a></li>
-            <li><a >Store Single</a></li>
-            <li><a >Single Post</a>
-            </li>
-            <li><a >Blog</a></li>
-
-
-
-          </ul>
-        </div>
-      </div>
-      
-  </div>
-  <!-- Container End -->
-</footer>
-<!-- Footer Bottom -->
-<footer class="footer-bottom">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-12">
-        <!-- Copyright -->
-        <div class="copyright">
-          <p>Copyright © <script>
-              var CurrentYear = new Date().getFullYear()
-              document.write(CurrentYear)
-            </script>. All Rights Reserved, theme by <a class="text-primary" href="https://themefisher.com" target="_blank">themefisher.com</a></p>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  <!-- Container End -->
-  <!-- To Top -->
-  <div class="top-to">
-    <a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-  </div>
-</footer>
 
 <!-- JAVASCRIPTS -->
 <script src="../assets/plugins/jQuery/jquery.min.js"></script>
@@ -488,6 +411,57 @@
 <script src="../assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="../assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
 <script src="../assets/js/script.js"></script>
+
+<script>
+	// Add to favorites
+	$(".card-body #fav-button").on('click', function(){
+		var div = $(this).parent().parent().parent().parent();
+		var name = div.find(".card-body .card-title a").html();
+		var price = div.find('.price').html().trim();
+		var store = div.find(".store i").html();
+		var img = div.find(".card-img-top").attr("src");
+		var link = div.find(".card-body .card-title a").attr("href");
+		
+		$.get("control.php", {choice: 'favourite', name: name, img: img,
+		link: link, price: price, store: store}, function(data){
+			alert(data);
+		});
+	});
+
+	// Add to history
+	$( ".product-item" ).click(function( event ) {
+		var target = $( event.target );
+		
+		if ( target.is( ".card-img-top" )){ 
+			var div = target.parent().parent();
+			var name = div.next().find(".card-title a").html();
+			var price = div.find('.price').html().trim();
+			var store = div.next().find(".store i").html();
+			var img = div.find("a img").attr("src");
+			var link = div.find("a").attr("href");
+			
+			
+			$.get("control.php", {choice: 'history', name: name, img: img,
+			link: link, price: price, store: store}, function(data){
+				return data;
+			});
+		}
+		else if (target.is(".card-body .card-title a")) {
+			var div = target.parent().parent();
+			var name = div.find(".card-title a").html();
+			var price = div.prev().find('.price').html().trim();
+			var store = div.find(".store i").html();
+			var img = div.prev().find(".card-img-top").attr("src");
+			var link = div.find(".card-title a").attr("href");
+			
+			$.get("control.php", {choice: 'history', name: name, img: img,
+			link: link, price: price, store: store}, function(data){
+				$(".search-result").append(data);
+				// return data;
+			});
+		}
+	});
+</script>
 
 </body>
 

@@ -71,7 +71,7 @@
 					<!-- Dropdown menu for user profile -->
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 						<a class="dropdown-item" href="#">User Profile</a>
-						<a class="dropdown-item" href="index.php?logout=yes">Log out</a>
+						<a class="dropdown-item" href="../index.php?logout=yes">Log out</a>
 						
 					</div>
 				</div>
@@ -233,16 +233,16 @@
 						$results = '';
 
 						for ($i = 0; $i < 15; $i++){
-							$name = $html->find(".info", $i)->find('h3', 0);
+							$name = $html->find(".info", $i)->find('h3', 0)->text();
 							$img = $html->find(".img-c", $i)->find('img', 0)->getAttribute('data-src');
-							$price = $html->find('.core', $i)->find('.prc', 0);
+							$price = $html->find('.core', $i)->find('.prc', 0)->text();
 							$link = 'https://www.jumia.com.gh'. $html->find('.core', $i)->href;
 
 							$results.='<div class="ad-listing-list mt-20">
                                         <div class="row p-lg-3 p-sm-5 p-4">
                                             <div class="col-lg-4 align-self-center">
-                                                <div class="price">'.$price.'</div>
-                                                <a href="'.$link.'">
+                                                
+                                                <a href="'.$link.'" target="_blank">
                                                     <img src="'.$img.'" class="img-fluid" alt="">
                                                 </a>
                                             </div>
@@ -251,10 +251,11 @@
                                                     <div class="col-lg-6 col-md-10">
                                                         <div class="ad-listing-content">
                                                             <div>
-                                                                <a href="'.$link.'" class="font-weight-bold">'.$name.'</a>
+                                                                <a href="'.$link.'" class="font-weight-bold" target="_blank">'.$name.'</a>
+																<div class="price">'.$price.'</div>
                                                             </div>
                                                             <ul class="list-inline mt-2 mb-3">
-                                                                <li class="list-inline-item"><a href="'.$link.'"><i class="fa fa-tag"></i>Jumia</a></li>
+                                                                <li class="list-inline-item"><a class="store" href="'.$link.'" target="_blank"><i class="fa fa-tag">Jumia</i></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -278,16 +279,15 @@
 						$results = '';
 
 						for ($i = 0; $i < 15; $i++){
-							$name = $html->find(".a-size-base-plus", $i);
+							$name = $html->find(".a-size-base-plus", $i)->text();
 							$img = $html->find(".s-image", $i)->getAttribute('src');
-							$price = $html->find('.a-price .a-offscreen', $i);
+							$price = $html->find('.a-price .a-offscreen', $i)->text();
 							$link = 'https://www.amazon.com'. $html->find('div[data-component-type="s-search-result"]', $i)->find('h2', 0)->find('a', 0)->href;
 
 							$results.='<div class="ad-listing-list mt-20">
                                         <div class="row p-lg-3 p-sm-5 p-4">
                                             <div class="col-lg-4 align-self-center">
-                                                <div class="price">'.$price.'</div>
-                                                <a href="'.$link.'">
+                                                <a href="'.$link.'" target="_blank">
                                                     <img src="'.$img.'" class="img-fluid" alt="">
                                                 </a>
                                             </div>
@@ -296,10 +296,11 @@
                                                     <div class="col-lg-6 col-md-10">
                                                         <div class="ad-listing-content">
                                                             <div>
-                                                                <a href="'.$link.'" class="font-weight-bold">'.$name.'</a>
+                                                                <a href="'.$link.'" class="font-weight-bold" target="_blank">'.$name.'</a>
+																<div class="price">'.$price.'</div>
                                                             </div>
                                                             <ul class="list-inline mt-2 mb-3">
-                                                                <li class="list-inline-item"><a href="'.$link.'"><i class="fa fa-tag"></i>Amazon</a></li>
+                                                                <li class="list-inline-item"><a class="store" target="_blank" href="'.$link.'"><i class="fa fa-tag">Amazon</i></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -324,17 +325,17 @@
 
 						for ($i = 0; $i < 15; $i++){
 							$card = $html->find('.normal--2QYVk', $i);
-							$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0);
+							$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0)->text();
 							$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
-							$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0);
+							$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0)->text();
 	
 							$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
                             
 							$results.='<div class="ad-listing-list mt-20">
                                         <div class="row p-lg-3 p-sm-5 p-4">
                                             <div class="col-lg-4 align-self-center">
-                                                <div class="price">'.$price.'</div>
-                                                <a href="'.$link.'">
+                                                
+                                                <a target="_blank" href="'.$link.'">
                                                     <img src="'.$img.'" class="img-fluid" alt="">
                                                 </a>
                                             </div>
@@ -343,10 +344,11 @@
                                                     <div class="col-lg-6 col-md-10">
                                                         <div class="ad-listing-content">
                                                             <div>
-                                                                <a href="'.$link.'" class="font-weight-bold">'.$name.'</a>
+                                                                <a  href="'.$link.'" class="font-weight-bold" target="_blank">'.$name.'</a>
+																<div class="price">'.$price.'</div>
                                                             </div>
                                                             <ul class="list-inline mt-2 mb-3">
-                                                                <li class="list-inline-item"><a href="'.$link.'"><i class="fa fa-tag"></i>Tonaton</a></li>
+                                                                <li class="list-inline-item"><a class="store" target="_blank" href="'.$link.'"><i class="fa fa-tag">Tonaton</i></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -402,108 +404,6 @@
 	</div>
 </section>
 
-<!--============================
-=            Footer            =
-=============================-->
-
-<footer class="footer section section-sm">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-7 offset-md-1 offset-lg-0">
-        <!-- About -->
-        <div class="block about">
-          <!-- footer logo -->
-          <img src="images/logo-footer.png" alt="">
-          <!-- description -->
-          <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 offset-lg-1 col-md-3">
-        <div class="block">
-          <h4>Site Pages</h4>
-          <ul>
-            <li><a href="#">Boston</a></li>
-            <li><a href="#">How It works</a></li>
-            <li><a href="#">Deals & Coupons</a></li>
-            <li><a href="#">Articls & Tips</a></li>
-            <li><a href="terms-condition.html">Terms & Conditions</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- Link list -->
-      <div class="col-lg-2 col-md-3 offset-md-1 offset-lg-0">
-        <div class="block">
-          <h4>Admin Pages</h4>
-          <ul>
-            <li><a href="category.php">Category</a></li>
-            <li><a href="single.html">Single Page</a></li>
-            <li><a href="store.html">Store Single</a></li>
-            <li><a href="single-blog.html">Single Post</a>
-            </li>
-            <li><a href="blog.html">Blog</a></li>
-
-
-
-          </ul>
-        </div>
-      </div>
-      <!-- Promotion -->
-      <div class="col-lg-4 col-md-7">
-        <!-- App promotion -->
-        <div class="block-2 app-promotion">
-          <div class="mobile d-flex">
-            <a href="">
-              <!-- Icon -->
-              <img src="images/footer/phone-icon.png" alt="mobile-icon">
-            </a>
-            <p>Get the Dealsy Mobile App and Save more</p>
-          </div>
-          <div class="download-btn d-flex my-3">
-            <a href="#"><img src="images/apps/google-play-store.png" class="img-fluid" alt=""></a>
-            <a href="#" class=" ml-3"><img src="images/apps/apple-app-store.png" class="img-fluid" alt=""></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Container End -->
-</footer>
-<!-- Footer Bottom -->
-<footer class="footer-bottom">
-  <!-- Container Start -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-12">
-        <!-- Copyright -->
-        <div class="copyright">
-          <p>Copyright © <script>
-              var CurrentYear = new Date().getFullYear()
-              document.write(CurrentYear)
-            </script>. All Rights Reserved, theme by <a class="text-primary" href="https://themefisher.com" target="_blank">themefisher.com</a></p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-12">
-        <!-- Social Icons -->
-        <ul class="social-media-icons text-right">
-          <li><a class="fa fa-facebook" href="https://www.facebook.com/themefisher" target="_blank"></a></li>
-          <li><a class="fa fa-twitter" href="https://www.twitter.com/themefisher" target="_blank"></a></li>
-          <li><a class="fa fa-pinterest-p" href="https://www.pinterest.com/themefisher" target="_blank"></a></li>
-          <li><a class="fa fa-vimeo" href=""></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- Container End -->
-  <!-- To Top -->
-  <div class="top-to">
-    <a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-  </div>
-</footer>
-
 <!-- JAVASCRIPTS -->
 <script src="../assets/plugins/jQuery/jquery.min.js"></script>
 <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
@@ -517,6 +417,56 @@
 <script src="../assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="../assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
 <script src="../assets/js/script.js"></script>
+
+<script>
+	// Add to favorites
+	$(".card-body #fav-button").on('click', function(){
+		var div = $(this).parent().parent().parent().parent();
+		var name = div.find(".card-body .card-title a").html();
+		var price = div.find('.price').html().trim();
+		var store = div.find(".store i").html();
+		var img = div.find(".card-img-top").attr("src");
+		var link = div.find(".card-body .card-title a").attr("href");
+		
+		$.get("control.php", {choice: 'favourite', name: name, img: img,
+		link: link, price: price, store: store}, function(data){
+			alert(data);
+		});
+	});
+
+	// Add to history
+	$( ".ad-listing-list" ).click(function( event ) {
+		var target = $( event.target );
+		
+		if ( target.is( ".img-fluid" )) {
+			var div = target.parent().parent().next().find(".ad-listing-content");
+			var name = div.find("div a").html();
+			var price = div.find('.price').html().trim();
+			var store = div.find(".store i").html();
+			var img = target.attr("src");
+			var link = div.find("div a").attr("href");
+			
+			$.get("control.php", {choice: 'history', name: name, img: img,
+			link: link, price: price, store: store}, function(data){
+				return data;
+			});
+		} 
+		else if ( target.is(".ad-listing-content div a")) {
+			var div = target.parent().parent();
+			var infodiv = div.parent().parent().parent().prev();
+			var name = div.find("div a").html();
+			var price = div.find('.price').html().trim();
+			var store = div.find(".store i").html();
+			var img = infodiv.find(".img-fluid").attr("src");
+			var link = div.find("div a").attr("href");
+			
+			$.get("control.php", {choice: 'history', name: name, img: img,
+			link: link, price: price, store: store}, function(data){
+				return data;
+			});
+		}
+	});
+</script>
 
 </body>
 

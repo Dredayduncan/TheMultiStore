@@ -18,27 +18,30 @@ create table Users(
 );
 
 create table SearchHistory(
+    time timestamp,
 	username varchar(50),
 	foreign key(username) references Users(username),
     searchHistory varchar(255)
 );
 
 create table History(
+    time timestamp,
 	username varchar(50),
     foreign key(username) references Users(username),
-    `name` varchar(50) NOT NULL,
+    `name` varchar(255) NOT NULL,
     img varchar(255),
     link varchar(255) NOT NULL,
-    price float,
+    price varchar(50),
     store varchar(50)
 );
 
 create table Favourites(
+    time timestamp,
 	username varchar(50),
     foreign key(username) references Users(username),
-    `name` varchar(50) NOT NULL,
+    `name` varchar(255) NOT NULL,
     img varchar(255),
     link varchar(255) NOT NULL,
-    price float,
+    price varchar(50),
     store varchar(50)
 );

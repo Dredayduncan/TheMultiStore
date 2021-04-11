@@ -174,7 +174,7 @@
 			<?php
 			// Get the User favourites
 
-			$sql = "SELECT * FROM History WHERE username='".$_SESSION["username"]."'";
+			$sql = "SELECT * FROM History WHERE username='".$_SESSION["username"]."' order by time desc";
 
 			// execute query
 			$result = mysqli_query($conn, $sql);
@@ -188,7 +188,7 @@
 					echo '<div class="ad-listing-list mt-20">
 					<div class="row p-lg-3 p-sm-5 p-4">
 						<div class="col-lg-4 align-self-center">
-							<div class="price">'.$data['price'].'</div>
+							
 							<a href="'.$data['link'].'">
 								<img src="'.$data['img'].'" class="img-fluid" alt="">
 							</a>
@@ -199,17 +199,15 @@
 									<div class="ad-listing-content">
 										<div>
 											<a href="'.$data['link'].'" class="font-weight-bold">'.$data['name'].'</a>
+											<div class="price">'.$data['price'].'</div>
 										</div>
 										<ul class="list-inline mt-2 mb-3">
-											<li class="list-inline-item"><a href="'.$data['link'].'"><i class="fa fa-tag"></i>'.$data['store'].'</a></li>
-											<a>
-											<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
+											<li class="list-inline-item"><a class="store" href="'.$data['link'].'"><i class="fa fa-tag">'.$data['store'].'</i></a></li>
+											<button type="button" id ="trash-button" class="btn" style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
 												<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 											  </svg>
-											
-											</a>
 										</ul>
 									</div>
 								</div>
@@ -272,6 +270,23 @@
 <script src="../assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
 <script src="../assets/plugins/smoothscroll/SmoothScroll.min.js"></script>
 <script src="../assets/js/script.js"></script>
+
+<script>
+	// Delete from History
+	$(".btn").on('click', function(){
+		var div = $(this).parent().parent();
+		var name = div.find("div a").html();
+		var price = div.find('.price').html().trim();
+		var store = div.find(".store i").html();
+		var img = div.parent().parent().parent().prev().find(".img-fluid").attr("src");
+		var link = div.find("div a").attr("href");
+		
+		$.get("control.php", {choice: 'hist_delete', name: name, img: img,
+		link: link, price: price, store: store}, function(data){
+			location.reload();
+		});
+	});
+</script>
 
 </body>
 
