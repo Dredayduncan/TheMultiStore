@@ -2,10 +2,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-drop database if exists Multistore;
-create database Multistore;
-use Multistore;
-
 create table Users(
 	firstName varchar(20) NOT NULL,
     lastName varchar(50) NOT NULL,
@@ -15,13 +11,6 @@ create table Users(
     email varchar(255) NOT NULL,
     DOB date NOT NULL,
     token int(6)
-);
-
-create table SearchHistory(
-    time timestamp,
-	username varchar(50),
-	foreign key(username) references Users(username),
-    searchHistory varchar(255)
 );
 
 create table History(

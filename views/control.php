@@ -12,8 +12,8 @@
             $price = $_GET['price'];
             $store = $_GET['store'];
 
-            $sql = "INSERT into Favourites (time, username, name, img, link, price, store)
-                  VALUES (CURRENT_TIMESTAMP, '".$_SESSION["username"]."', '".$name."', '".$img."', '".$link."', '".$price."', '".$store."')";
+            $sql = 'INSERT into Favourites (time, username, name, img, link, price, store)
+                  VALUES (CURRENT_TIMESTAMP, "'.$_SESSION['username'].'", "'.$name.'", "'.$img.'", "'.$link.'", "'.$price.'", "'.$store.'")';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -22,6 +22,7 @@
                 echo "Item has been added to favourites";
             }
             else{
+                echo $name;
                 die("ERROR: Could not able to execute $result. " . mysqli_error($conn));
             }
 
@@ -34,8 +35,8 @@
             $price = $_GET['price'];
             $store = $_GET['store'];
 
-            $sql = "INSERT into History (time, username, name, img, link, price, store)
-                  VALUES (CURRENT_TIMESTAMP, '".$_SESSION["username"]."', '".$name."', '".$img."', '".$link."', '".$price."', '".$store."')";
+            $sql = 'INSERT into History (time, username, name, img, link, price, store)
+                  VALUES (CURRENT_TIMESTAMP, "'.$_SESSION['username'].'", "'.$name.'", "'.$img.'", "'.$link.'", "'.$price.'", "'.$store.'")';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -52,8 +53,8 @@
             $price = $_GET['price'];
             $store = $_GET['store'];
 
-            $sql = "DELETE from Favourites WHERE username = '".$_SESSION["username"]."' and name = '".$name."' and img = '".$img."' and
-                    link = '".$link."' and price = '".$price."' and store = '".$store."'";
+            $sql = 'DELETE from Favourites WHERE username = "'.$_SESSION["username"].'" and name = "'.$name.'" and img = "'.$img.'" and
+                    link = "'.$link.'" and price = "'.$price.'" and store = "'.$store.'"';
 
             // execute query
             $result = mysqli_query($conn, $sql);
@@ -71,8 +72,8 @@
             $price = $_GET['price'];
             $store = $_GET['store'];
 
-            $sql = "DELETE from History WHERE username = '".$_SESSION["username"]."' and name = '".$name."' and img = '".$img."' and
-                    link = '".$link."' and price = '".$price."' and store = '".$store."'";
+            $sql = 'DELETE from History WHERE username = "'.$_SESSION["username"].'" and name = "'.$name.'" and img = "'.$img.'" and
+                    link = "'.$link.'" and price = "'.$price.'" and store = "'.$store.'"';
 
             // execute query
             $result = mysqli_query($conn, $sql);

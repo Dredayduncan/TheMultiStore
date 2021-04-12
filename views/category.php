@@ -1,3 +1,58 @@
+<?php
+
+	// write query
+	session_start();
+
+	if (isset($_GET['logout'])){
+		session_destroy();
+		header('Refresh: 0; url=../index.php');
+	}
+
+	// Menu to display if a user is logged in
+	$login = '<ul class="navbar-nav ml-auto mt-10">
+		<li class="nav-item ">
+			<a class="nav-link login-button border border-success bg-success text-white" href="../auth/login.php">Login</a>
+		</li>
+
+	</ul>';
+
+	$logMenu = '';
+
+	if (isset($_SESSION['username'])){
+		$login = '<ul>
+			<li class="nav-item dropdown show">
+				<div class="drop">
+					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+						</svg>
+						
+					</a>
+
+					<!-- Dropdown menu for user profile -->
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+						<a class="dropdown-item" href="../index.php?logout=yes">Log out</a>
+						
+					</div>
+				</div>
+				
+			</li>
+		</ul>';
+
+	$logMenu = '<li class="nav-item ">
+			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
+			</a>
+		</li>';
+	}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,72 +80,10 @@
   <!-- CUSTOM CSS -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
 </head>
 
 
-<?php
 
-	// write query
-	session_start();
-
-	if (isset($_GET['logout'])){
-		session_destroy();
-		header('Refresh: 0; url=index.php');
-	}
-
-	// Menu to display if a user is logged in
-	$login = '<ul class="navbar-nav ml-auto mt-10">
-		<li class="nav-item ">
-			<a class="nav-link login-button border border-success bg-success text-white" href="../auth/login.php">Login</a>
-		</li>
-
-	</ul>';
-
-	$logMenu = '';
-
-	if (isset($_SESSION['username'])){
-		$login = '<ul>
-			<li class="nav-item dropdown show">
-				<div class="drop">
-					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-						</svg>
-						
-					</a>
-
-					<!-- Dropdown menu for user profile -->
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">User Profile</a>
-						<a class="dropdown-item" href="../index.php?logout=yes">Log out</a>
-						
-					</div>
-				</div>
-				
-			</li>
-		</ul>';
-
-	$logMenu = '<li class="nav-item ">
-			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
-			</a>
-		</li>';
-	}
-
-
-?>
 
 
 <body class="body-wrapper">
@@ -162,29 +155,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<!-- <div class="col-md-3">
-					<div class="category-sidebar">
-						<div class="widget category-list">
-							<h4 class="widget-header">All Category</h4>
-							<ul class="category-list">
-								<li><a href="category.php">Amazon <span>93</span></a></li>
-								<li><a href="category.php">Jumia <span>233</span></a></li>
-								<li><a href="category.php">Tonaton  <span>183</span></a></li>
-							</ul>
-						</div>		
-					</div>
-				</div> -->
-			<div class="col-md-9">
+			<div class="row d-flex justify-content-center">
+				
+			<div class="col-md-9 ">
 				<div class="category-search-filter">
 					<div class="row">
-						<div class="col-md-6">
-							<strong>Sort</strong>
-							<select>
-								<option value="2">Lowest to Highest</option>
-								<option value="3">Highest to Lowest</option>
-							</select>
-						</div>
+					
 						<div class="col-md-6">
 							<div class="view">
 								<strong>Views</strong>
@@ -306,12 +282,37 @@
 								$results = '';
 
 								for ($i = 0; $i < 15; $i++){
-									$card = $html->find('.normal--2QYVk', $i);
-									$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0)->text();
-									$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
-									$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0)->text();
-			
-									$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
+									try{
+										$card = $html->find('.normal--2QYVk', $i);
+									}
+									catch(Error $e){
+										return '';
+									}
+									try{
+										$name = $card->find("a", 0)->find('.content--3JNQz', 0)->find('h2', 0)->text();
+									}
+									catch(Error $e){
+										return '';
+									}
+									try{
+										$img = $html->find(".normal-ad--1TyjD", $i)->getAttribute('src');
+									}
+									catch(Error $e){
+										return '';
+									}
+									try{
+										$price = $card->find("a", 0)->find('.content--3JNQz', 0)->find('.price--3SnqI', 0)->find('span', 0)->text();
+									}
+									catch(Error $e){
+										return '';
+									}
+									try{
+										$link = 'https://tonaton.com'. $card->find('.card-link--3ssYv', 0)->href;
+									}
+									catch(Error $e){
+										return '';
+									}
+									
 									$results.='<div class="col-sm-12 col-lg-4 col-md-6">
 													<!-- product card -->
 													<div class="product-item bg-light">
@@ -357,13 +358,13 @@
 
 							if (isset($_POST['item'])){
 								echo JumiaResults($item, $context);
-								// echo AmazonResults($item, $context);
+								echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							else{
 								$item = str_replace(' ', '+', $_GET['search']);
 								echo JumiaResults($item, $context);
-								// echo AmazonResults($item, $context);
+								echo AmazonResults($item, $context);
 								echo tonatonResults($item, $context);
 							}
 							
@@ -371,7 +372,7 @@
 					</div>
 				</div>
 
-				<!-- Pagination -->
+				<!-- Pagination
 				<div class="pagination justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
@@ -392,7 +393,7 @@
 							</li>
 						</ul>
 					</nav>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

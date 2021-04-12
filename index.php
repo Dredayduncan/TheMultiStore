@@ -26,13 +26,6 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
 </head>
 
 <?php
@@ -69,7 +62,6 @@
 
 					<!-- Dropdown menu for user profile -->
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">User Profile</a>
 						<a class="dropdown-item" href="index.php?logout=yes">Log out</a>
 						
 					</div>
@@ -146,17 +138,7 @@
 											<div class="form-group col-md-10">
 												<input type="text" class="form-control my-2 my-lg-1" id="inputtext4" name='item' placeholder="What are you looking for">
 											</div>
-											<!-- <div class="form-group col-md-3">
-												<select class="w-100 form-control mt-lg-1 mt-md-2">
-													<option>Category</option>
-													<option value="1">Top rated</option>
-													<option value="2">Lowest Price</option>
-													<option value="4">Highest Price</option>
-												</select>
-											</div>
-											<div class="form-group col-md-3">
-												<input type="text" class="form-control my-2 my-lg-1" id="inputLocation4" placeholder="Location">
-											</div> -->
+											
 											<div class="form-group col-md-2 align-self-center">
 												<!-- <a id='homeSearch' class="nav-link login-button border border-primary bg-primary text-white" href="category.php">Search</a> -->
 												<button type="submit" class="btn btn-primary">Search</button>
@@ -193,150 +175,48 @@
 				<!-- offer 01 -->
 				<div class="col-lg-12">
 					<div class="trending-ads-slide">
-						<div class="col-sm-12 col-lg-4">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="assets/images/products/products-1.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
+					<?php
+						// Get the History
+						include "auth/config.php";
+
+						$sql = "SELECT * FROM History order by time desc LIMIT 4";
+
+						// execute query
+						$result = mysqli_query($conn, $sql);
+
+						if(!$result){
+							die("ERROR: Could not able to execute $sql. " . mysqli_error($conn));
+						}else{
+
+							while ($data = mysqli_fetch_array($result)){
+
+								echo '<div class="col-sm-12 col-lg-4">
+								<!-- product card -->
+								<div class="product-item bg-light">
+									<div class="card">
+										<div class="thumb-content">
+											<div class="price">'.$data['price'].'</div>
+											<a href="'.$data['link'].'">
+												<img class="card-img-top img-fluid" src="'.$data['img'].'" alt="Card image cap">
+											</a>
+										</div>
+										<div class="card-body">
+											<h4 class="card-title"><a href="'.$data['link'].'">'.$data['name'].'</a></h4>
+											<ul class="list-inline product-meta">
+												<li class="list-inline-item">
+													<a href="'.$data['link'].'"><i class="fa fa-tag">'.$data['store'].'</i></a>
+												</li>
 											</ul>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-
-
-						<div class="col-sm-12 col-lg-4">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="assets/images/products/products-2.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">Full Study Table Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-12 col-lg-4">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="assets/images/products/products-3.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-12 col-lg-4">
-							<!-- product card -->
-							<div class="product-item bg-light">
-								<div class="card">
-									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
-										<a href="single.html">
-											<img class="card-img-top img-fluid" src="assets/images/products/products-2.jpg" alt="Card image cap">
-										</a>
-									</div>
-									<div class="card-body">
-										<h4 class="card-title"><a href="single.html">Full Study Table Combo</a></h4>
-										<ul class="list-inline product-meta">
-											<li class="list-inline-item">
-												<a href="single.html"><i class="fa fa-folder-open-o"></i>Furnitures</a>
-											</li>
-											<li class="list-inline-item">
-												<a href="#"><i class="fa fa-calendar"></i>26th December</a>
-											</li>
-										</ul>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, aliquam!</p>
-										<div class="product-ratings">
-											<ul class="list-inline">
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+							</div>';
+							}
+				
+						}
+						?>
 					</div>
 				</div>
-				
-				
 			</div>
 		</div>
 	</section>

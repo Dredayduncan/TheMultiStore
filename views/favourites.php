@@ -1,3 +1,60 @@
+<?php
+
+	// Get config file
+	include '../auth/config.php';
+
+	// write query
+	session_start();
+
+	if (isset($_GET['logout'])){
+		session_destroy();
+		header('Refresh: 0; url=../index.php');
+	}
+
+	// Menu to display if a user is logged in
+	$login = '<ul class="navbar-nav ml-auto mt-10">
+		<li class="nav-item ">
+			<a class="nav-link login-button border border-success bg-success text-white" href="../auth/login.php">Login</a>
+		</li>
+
+	</ul>';
+
+	$logMenu = '';
+
+	if (isset($_SESSION['username'])){
+		$login = '<ul>
+			<li class="nav-item dropdown show">
+				<div class="drop">
+					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+						</svg>
+						
+					</a>
+
+					<!-- Dropdown menu for user profile -->
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="../index.php?logout=yes">Log out</a>
+						
+					</div>
+				</div>
+				
+			</li>
+		</ul>';
+
+	$logMenu = '<li class="nav-item active">
+			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
+			</a>
+		</li>';
+	}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,64 +93,7 @@
 </head>
 
 
-<?php
 
-	// Get config file
-	include '../auth/config.php';
-
-	// write query
-	session_start();
-
-	if (isset($_GET['logout'])){
-		session_destroy();
-		header('Refresh: 0; url=index.php');
-	}
-
-	// Menu to display if a user is logged in
-	$login = '<ul class="navbar-nav ml-auto mt-10">
-		<li class="nav-item ">
-			<a class="nav-link login-button border border-success bg-success text-white" href="../auth/login.php">Login</a>
-		</li>
-
-	</ul>';
-
-	$logMenu = '';
-
-	if (isset($_SESSION['username'])){
-		$login = '<ul>
-			<li class="nav-item dropdown show">
-				<div class="drop">
-					<a class="nav-link text-black dropdown-toggle "href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-						<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-						<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-						</svg>
-						
-					</a>
-
-					<!-- Dropdown menu for user profile -->
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">User Profile</a>
-						<a class="dropdown-item" href="../index.php?logout=yes">Log out</a>
-						
-					</div>
-				</div>
-				
-			</li>
-		</ul>';
-
-	$logMenu = '<li class="nav-item ">
-			<a class="nav-link"  href="favourites.php">Favourites<span><i class=""></i></span>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link"  href="History.php">History<span><i class=""></i></span>
-			</a>
-		</li>';
-	}
-
-
-?>
 
 <body class="body-wrapper">
 
@@ -131,47 +131,10 @@
 				<div class="col-md-12">
 					<div class="search-result bg-gray">
 					<h2>Favourites</h2>
-						<!--// <?php
-						//	if ($_POST['item']){
-								//$item = str_replace(' ', '+', $_POST['item']);
-								//echo "<h2>Results For ".$_POST['item']."</h2>";
-							//}
-						//	else{
-							//	$product = $_GET['search'];
-							//	echo "<h2>Results For ".$product."</h2>";
-						//	}
-						//?> -->
-						
-						
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<!-- <div class="col-md-3">
-					<div class="category-sidebar">
-						<div class="widget category-list">
-							<h4 class="widget-header">All Category</h4>
-							<ul class="category-list">
-								<li><a href="category.php">Amazon <span>93</span></a></li>
-								<li><a href="category.php">Jumia <span>233</span></a></li>
-								<li><a href="category.php">Tonaton  <span>183</span></a></li>
-							</ul>
-						</div>		
-				</div> -->
-			</div>
-			<div class="col-md-9">
-				<div class="category-search-filter">
-					<div class="row">
-						<div class="col-md-6">
-							<strong>Sort</strong>
-							<select>
-								<option value="2">Lowest to Highest</option>
-								<option value="3">Highest to Lowest</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 
 			<?php
 				// Get the User favourites
@@ -206,8 +169,8 @@
 											<ul class="list-inline mt-2 mb-3">
 												<li class="list-inline-item"><a class="store"  href="'.$data['link'].'"><i class="fa fa-tag">'.$data['store'].'</i></a></li>
 												<a>
-												<button type="button" id ="fav-button" class="btn  " style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+												<button type="button" id ="fav-button" class="btn" style="margin-left:110px; cursor: pointer;  color: red; transition: 500ms linear ease-in; transform: scale(1.1);">
+												<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 													<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
 													<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
 											  	</svg>
